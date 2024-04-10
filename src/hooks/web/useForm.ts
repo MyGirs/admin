@@ -132,6 +132,7 @@ export const useForm = () => {
      * @returns ElForm instance
      */
     getElFormExpose: async () => {
+      console.log(getForm, '--getForm--')
       await getForm()
       return unref(elFormRef)
     },

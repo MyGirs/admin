@@ -18,6 +18,7 @@ router.beforeEach(async (to, from, next) => {
   const permissionStore = usePermissionStoreWithOut()
   const appStore = useAppStoreWithOut()
   const userStore = useUserStoreWithOut()
+  console.log(userStore.getUserInfo, 'userStore.getUserInfo')
   if (userStore.getUserInfo) {
     if (to.path === '/login') {
       next({ path: '/' })
@@ -44,13 +45,15 @@ router.beforeEach(async (to, from, next) => {
       const redirect = decodeURIComponent(redirectPath as string)
       const nextData = to.path === redirect ? { ...to, replace: true } : { path: redirect }
       permissionStore.setIsAddRouters(true)
+      console.log(nextData, '--nextData-')
       next(nextData)
     }
   } else {
+
     if (NO_REDIRECT_WHITE_LIST.indexOf(to.path) !== -1) {
       next()
     } else {
-      next(`/login?redirect=${to.path}`) // 否则全部重定向到登录页
+      next(`/login`) // 否则全部重定向到登录页
     }
   }
 })

@@ -11,7 +11,7 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard/analysis',
+    redirect: '/dashboard/home',
     name: 'Root',
     meta: {
       hidden: true
@@ -83,81 +83,20 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
   {
     path: '/dashboard',
     component: Layout,
-    redirect: '/dashboard/analysis',
+    redirect: '/dashboard/home',
     name: 'Dashboard',
     meta: {
-      title: t('router.dashboard'),
-      icon: 'ant-design:dashboard-filled',
-      alwaysShow: true
     },
     children: [
       {
-        path: 'analysis',
+        path: 'home',
         component: () => import('@/views/Dashboard/Analysis.vue'),
-        name: 'Analysis',
+        name: 'Home',
         meta: {
-          title: t('router.analysis'),
-          noCache: true,
-          affix: true
+          title: '首页',
+          icon: 'ant-design:dashboard-filled',
         }
       },
-      // {
-      //   path: 'workplace',
-      //   component: () => import('@/views/Dashboard/Workplace.vue'),
-      //   name: 'Workplace',
-      //   meta: {
-      //     title: t('router.workplace'),
-      //     noCache: true
-      //   }
-      // }
-    ]
-  },
-  {
-    path: '/components',
-    component: Layout,
-    name: 'ComponentsDemo',
-    meta: {
-      title: t('router.component'),
-      icon: 'bx:bxs-component',
-      alwaysShow: true
-    },
-    children: [
-      {
-        path: 'form',
-        component: getParentLayout(),
-        redirect: '/components/form/default-form',
-        name: 'Form',
-        meta: {
-          title: t('router.form'),
-          alwaysShow: true
-        },
-        children: [
-          {
-            path: 'default-form',
-            component: () => import('@/views/Components/Form/DefaultForm.vue'),
-            name: 'DefaultForm',
-            meta: {
-              title: t('router.defaultForm')
-            }
-          },
-          {
-            path: 'use-form',
-            component: () => import('@/views/Components/Form/UseFormDemo.vue'),
-            name: 'UseForm',
-            meta: {
-              title: 'UseForm'
-            }
-          },
-          {
-            path: 'default-table',
-            component: () => import('@/views/Components/Table/UseTableDemo.vue'),
-            name: 'defaultTable',
-            meta: {
-              title: 'default-table'
-            }
-          }
-        ]
-      }
     ]
   },
   {
