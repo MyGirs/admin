@@ -4,7 +4,7 @@ import { Form, FormSchema } from '@/components/Form'
 import { useI18n } from '@/hooks/web/useI18n'
 import { ElCheckbox } from 'element-plus'
 import { useForm } from '@/hooks/web/useForm'
-import { loginApi,  getAdminRoleApi } from '@/api/login'
+import { loginApi, getAdminRoleApi } from '@/api/login'
 import { useAppStore } from '@/store/modules/app'
 import { usePermissionStore } from '@/store/modules/permission'
 import { useRouter } from 'vue-router'
@@ -56,7 +56,7 @@ const schema = reactive<FormSchema[]>([
       span: 24
     },
     componentProps: {
-      placeholder: 'admin or test'
+      placeholder: '请输入'
     }
   },
   {
@@ -71,7 +71,7 @@ const schema = reactive<FormSchema[]>([
       style: {
         width: '100%'
       },
-      placeholder: 'admin or test'
+      placeholder: '请输入密码'
     }
   },
   {
@@ -159,7 +159,6 @@ const signIn = async () => {
     if (isValid) {
       loading.value = true
       const formData = await getFormData<UserType>()
-
       try {
         const res = await loginApi(formData)
 
@@ -179,12 +178,12 @@ const signIn = async () => {
           if (appStore.getDynamicRouter) {
             getRole()
           } else {
-            await permissionStore.generateRoutes('static').catch(() => {})
+            await permissionStore.generateRoutes('static').catch(() => { })
             permissionStore.getAddRouters.forEach((route) => {
               addRoute(route as RouteRecordRaw) // 动态添加可访问路由表
             })
             permissionStore.setIsAddRouters(true)
-            push({ path: redirect.value || permissionStore.addRouters[0].path })
+            push({ path: permissionStore.addRouters[0].path })
           }
         }
       } finally {
@@ -204,7 +203,7 @@ const getRole = async () => {
   if (res) {
     const routers = res.data || []
     userStore.setRoleRouters(routers)
-   await permissionStore.generateRoutes('server', routers).catch(() => {})
+    await permissionStore.generateRoutes('server', routers).catch(() => { })
     permissionStore.getAddRouters.forEach((route) => {
       addRoute(route as RouteRecordRaw) // 动态添加可访问路由表
     })
@@ -216,13 +215,6 @@ const getRole = async () => {
 </script>
 
 <template>
-  <Form
-    :schema="schema"
-    :rules="rules"
-    label-position="top"
-    hide-required-asterisk
-    size="large"
-    class="dark:(border-1 border-[var(--el-border-color)] border-solid)"
-    @register="formRegister"
-  />
+  <Form :schema="schema" :rules="rules" label-position="top" hide-required-asterisk size="large"
+    class="dark:(border-1 border-[var(--el-border-color)] border-solid)" @register="formRegister" />
 </template>
