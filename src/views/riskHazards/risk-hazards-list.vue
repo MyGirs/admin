@@ -3,14 +3,14 @@
     <ContentWrap class="mb-20">
       <el-form class="page-query">
         <el-row>
-          <el-col :xl="24" :lg="12" :md="12" :sm="12" :xs="24">
+          <el-col :xl="12" :lg="12" :md="12" :sm="12" :xs="24">
             <el-form-item label="风险/隐患类型">
               <el-select v-model="responseData.type" placeholder="Select" style="width: 240px">
                 <el-option v-for="item in types" :key="item.value" :label="item.name" :value="item.value" />
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :xl="24" :lg="12" :md="12" :sm="12" :xs="24">
+          <el-col :xl="12" :lg="12" :md="12" :sm="12" :xs="24">
             <div class="page-button">
               <el-button type="primary" @click="getResponseData">查询</el-button>
               <el-button type="success" @click="handleAdd">新增</el-button>
@@ -19,7 +19,7 @@
         </el-row>
       </el-form>
     </ContentWrap>
-    <ContentWrap>
+    <ContentWrap title="风险隐患信息化管理">
       <el-table v-loading="loading" :data="responseData.list" height="400">
         <el-table-column prop="points" label="监测点位"></el-table-column>
         <el-table-column prop="position" label="监测位置"></el-table-column>

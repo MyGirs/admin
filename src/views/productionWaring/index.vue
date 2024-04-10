@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <div class="production-box">
+    <ContentWrap style="margin-bottom: 20px;">
       <ElRow :gutter="20">
         <ElCol :xl="6" :lg="12" :md="12" :sm="12" :xs="24">
           <ElCard shadow="hover" class="mb-20px">
@@ -10,19 +10,11 @@
                   <div class="font-size_24"> 当月产能预警</div>
                   <div class="target flex justify-between">
                     <div class="target-name">当月目标产能</div>
-                    <CountTo
-                      :start-val="0"
-                      :end-val="responseData.monthlyTarget"
-                      :duration="2600"
-                    />
+                    <CountTo :start-val="0" :end-val="responseData.monthlyTarget" :duration="2600" />
                   </div>
                   <div class="target flex justify-between">
                     <div class="target-name">当月目前实际产能</div>
-                    <CountTo
-                      :start-val="0"
-                      :end-val="responseData.monthlyActual"
-                      :duration="2600"
-                    />
+                    <CountTo :start-val="0" :end-val="responseData.monthlyActual" :duration="2600" />
                   </div>
                   <div class="waring-title" v-if="tip">{{ tip }}</div>
                 </div>
@@ -31,8 +23,8 @@
           </ElCard>
         </ElCol>
       </ElRow>
-    </div>
-    <ContentWrap>
+    </ContentWrap>
+    <ContentWrap title="产量统计预警">
       <el-table v-loading="loading" :data="responseData.list" height="400">
         <el-table-column prop="time" label="日期"></el-table-column>
         <el-table-column prop="classes" label="班次"></el-table-column>
@@ -41,12 +33,8 @@
         <el-table-column prop="endTotal" label="终累计数"></el-table-column>
         <el-table-column prop="weight" label="重量"></el-table-column>
       </el-table>
-      <el-pagination
-        layout="prev, pager, next"
-        :total="responseData.total"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-      />
+      <el-pagination layout="prev, pager, next" :total="responseData.total" @size-change="handleSizeChange"
+        @current-change="handleCurrentChange" />
     </ContentWrap>
   </div>
 </template>
@@ -110,21 +98,25 @@ onMounted(() => {
   font-size: 24px;
   font-weight: 500;
 }
+
 .target {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
+
   .target-name {
     font-size: 16px;
   }
 }
+
 .waring-title {
   margin-top: 10px;
   color: red;
   font-size: 18px;
   font-weight: 500;
 }
+
 .el-pagination {
   margin-top: 10px;
 }
