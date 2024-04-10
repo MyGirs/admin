@@ -147,6 +147,14 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
             meta: {
               title: 'UseForm'
             }
+          },
+          {
+            path: 'default-table',
+            component: () => import('@/views/Components/Table/UseTableDemo.vue'),
+            name: 'defaultTable',
+            meta: {
+              title: 'default-table'
+            }
           }
         ]
       }
@@ -169,7 +177,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         meta: {
           title: '值班记录表',
           noCache: true,
-          affix: true
+          affix: false
         }
       },
       {
@@ -179,7 +187,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         meta: {
           title: '处置记录',
           noCache: true,
-          affix: true
+          affix: false
         }
       },
       {
@@ -189,7 +197,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         meta: {
           title: '生产记录',
           noCache: true,
-          affix: true
+          affix: false
         }
       },
       {
@@ -199,7 +207,59 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         meta: {
           title: '生产统计',
           noCache: true,
-          affix: true
+          affix: false
+        }
+      }
+    ]
+  },
+  {
+    path: '/riskHazards',
+    name: 'RiskHazards',
+    component: Layout,
+    meta: {
+      title: '风险隐患信息化管理'
+    },
+    children: [
+      {
+        path: 'list',
+        component: () => import('@/views/riskHazards/risk-hazards-list.vue'),
+        name: 'RiskHazardsList',
+        meta: {
+          title: '风险隐患信息化管理',
+          noCache: true,
+          affix: false
+        }
+      },
+      {
+        path: 'add',
+        component: () => import('@/views/riskHazards/risk-hazards-add.vue'),
+        name: 'RiskHazardsAdd',
+        meta: {
+          title: '新增风险隐患信息化管理',
+          noCache: true,
+          affix: false,
+          hidden: true
+        }
+      }
+    ]
+  },
+
+  {
+    path: '/productionWaring',
+    name: 'ProductionWaring',
+    component: Layout,
+    meta: {
+      title: '产量统计预警'
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/productionWaring/index.vue'),
+        name: 'productionWaringPage',
+        meta: {
+          title: '产量统计预警',
+          noCache: true,
+          affix: false
         }
       }
     ]
