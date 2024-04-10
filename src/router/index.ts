@@ -101,15 +101,15 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
           affix: true
         }
       },
-      {
-        path: 'workplace',
-        component: () => import('@/views/Dashboard/Workplace.vue'),
-        name: 'Workplace',
-        meta: {
-          title: t('router.workplace'),
-          noCache: true
-        }
-      }
+      // {
+      //   path: 'workplace',
+      //   component: () => import('@/views/Dashboard/Workplace.vue'),
+      //   name: 'Workplace',
+      //   meta: {
+      //     title: t('router.workplace'),
+      //     noCache: true
+      //   }
+      // }
     ]
   },
   {
@@ -166,7 +166,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
     name: 'Infor',
     meta: {
       title: '信息化管理',
-      icon: 'bx:bxs-component',
+      icon: 'clarity:document-solid',
       alwaysShow: true
     },
     children: [
@@ -177,7 +177,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         meta: {
           title: '值班记录表',
           noCache: true,
-          affix: false
+
         }
       },
       {
@@ -187,7 +187,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         meta: {
           title: '处置记录',
           noCache: true,
-          affix: false
+
         }
       },
       {
@@ -197,7 +197,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         meta: {
           title: '生产记录',
           noCache: true,
-          affix: false
+
         }
       },
       {
@@ -207,7 +207,17 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         meta: {
           title: '生产统计',
           noCache: true,
-          affix: false
+
+        }
+      }, {
+        path: 'produce-statistics-add',
+        component: () => import('@/views/infor/produce-statistics-add.vue'),
+        name: 'ProduceStatisticsADD',
+        meta: {
+          hidden: true,
+          title: '新增',
+          noCache: true,
+          noTagsView: true
         }
       }
     ]
@@ -217,7 +227,6 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
     name: 'RiskHazards',
     component: Layout,
     meta: {
-      title: '风险隐患信息化管理'
     },
     children: [
       {
@@ -226,8 +235,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         name: 'RiskHazardsList',
         meta: {
           title: '风险隐患信息化管理',
-          noCache: true,
-          affix: false
+          icon: 'ep:management',
         }
       },
       {
@@ -237,19 +245,17 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         meta: {
           title: '新增风险隐患信息化管理',
           noCache: true,
-          affix: false,
-          hidden: true
+          hidden: true,
+          noTagsView: true
         }
       }
     ]
   },
-
   {
     path: '/productionWaring',
     name: 'ProductionWaring',
     component: Layout,
     meta: {
-      title: '产量统计预警'
     },
     children: [
       {
@@ -258,8 +264,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         name: 'productionWaringPage',
         meta: {
           title: '产量统计预警',
-          noCache: true,
-          affix: false
+          icon: 'cib:telegram-plane'
         }
       }
     ]

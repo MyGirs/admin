@@ -28,3 +28,14 @@ export const addRiskHazardsApi = (data) => {
   //   data
   // })
 }
+
+export const updatedRiskHazardsApi = (data) => {
+  return Promise.resolve({
+    code: 200
+  })
+  // return HttpClient({
+  //   url: '/api/updateRiskHazards',
+  //   method: 'post',
+  //   data
+  // })
+}
