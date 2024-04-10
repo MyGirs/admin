@@ -34,8 +34,9 @@
 <script setup lang="ts">
 import { ElButton } from 'element-plus'
 import { ContentWrap } from '@/components/ContentWrap'
-import { ref, reactive } from 'vue'
+import { ref, reactive,onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { getStatisticsList } from './apis'
 
 const loading = ref(false)
 
@@ -58,23 +59,30 @@ const handleCurrentChange = (val: number) => {
   getResponseData()
 }
 
+onMounted(() => {
+  getResponseData()
+})
+
+
 const getResponseData = async () => {
-  // let res = await getRiskHazardsApi({
-  //   pagesize: responseData.pagesize,
-  //   pagenum: responseData.pagenum,
-  //   type: responseData.type
-  // })
-  // if (res.code == 200) {
-  //   responseData.list = res.data
-  //   responseData.total = res.total
-  // } else {
-  //   responseData.list = []
-  //   responseData.total = 0
-  // }
+  let res = await getStatisticsList({
+    pagesize: responseData.pagesize,
+    pagenum: responseData.pagenum,
+  })
+  if (res.code == 200) {
+    responseData.list = res.data
+    responseData.total = res.total
+  } else {
+    responseData.list = []
+    responseData.total = 0
+  }
 }
 
 const openDetail = (row) => {
-  console.log(row)
+  router.push({
+    path: '/infor/produce-statistics/add-produce-statistics',
+    query: row
+  })
 }
 
 const handleAdd = () => {

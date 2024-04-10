@@ -15,12 +15,14 @@
             v-if="item.type == 'input'"
             :placeholder="item.tip || '请输入'"
             v-model="form[item.value]"
+            :readonly="isDetail"
           ></el-input>
           <el-input
             type="textarea"
             v-if="item.type == 'textarea'"
             v-model="form[item.value]"
             :placeholder="item.tip || '请输入'"
+            :readonly="isDetail"
           ></el-input>
 
           <el-date-picker
@@ -29,6 +31,7 @@
             v-model="form[item.value]"
             type="dates"
             :placeholder="item.tip || '请选择时间'"
+            :readonly="isDetail"
           />
 
           <el-select
@@ -47,7 +50,7 @@
         </el-form-item>
       </el-col>
       <div class="page-button">
-        <el-button type="primary" @click="handleAdd">确定</el-button>
+        <el-button type="primary" @click="handleAdd" v-if="isDetail">确定</el-button>
         <el-button @click="handleBack">返回</el-button>
       </div>
     </el-form>
@@ -56,10 +59,14 @@
 <script setup>
 import { ElButton, ElForm, ElInput, ElFormItem, ElDatePicker, ElMessage } from 'element-plus'
 import { ContentWrap } from '@/components/ContentWrap'
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref,onBeforeMount } from 'vue'
+import { useRouter,useRoute } from 'vue-router'
+import { addStatistics } from '../apis'
 
 const router = useRouter()
+const route = useRoute()
+
+let isDetail = ref(false)
 
 let form = ref({
   morningPlan: '',
@@ -122,12 +129,20 @@ const formItemList = [
   }
 ]
 
+onBeforeMount(() => {
+  let query = route.query
+  if (query) {
+    isDetail.value = true
+  }
+})
+
+
 const handleAdd = async () => {
-  // let res = await addRiskHazardsApi(form)
-  // if (res.code == 200) {
-  //   ElMessage.success('新增成功')
-  //   handleBack()
-  // }
+  let res = await addStatistics(form)
+  if (res.code == 200) {
+    ElMessage.success('新增成功')
+    handleBack()
+  }
 }
 
 const handleBack = () => {

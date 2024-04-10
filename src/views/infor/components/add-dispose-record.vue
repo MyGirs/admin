@@ -1,53 +1,24 @@
 <template>
   <ContentWrap title="新增处置记录">
     <el-form :model="form" label-width="100">
-      <el-col
-        :xl="8"
-        :lg="10"
-        :md="12"
-        :sm="12"
-        :xs="24"
-        v-for="(item, index) in formItemList"
-        :key="index"
-      >
+      <el-col :xl="8" :lg="10" :md="12" :sm="12" :xs="24" v-for="(item, index) in formItemList" :key="index">
         <el-form-item :label="item.label">
-          <el-input
-            v-if="item.type == 'input'"
-            :placeholder="item.tip || '请输入'"
-            v-model="form[item.value]"
-          ></el-input>
-          <el-input
-            type="textarea"
-            v-if="item.type == 'textarea'"
-            v-model="form[item.value]"
-            :placeholder="item.tip || '请输入'"
-          ></el-input>
+          <el-input v-if="item.type == 'input'" :readonly="isDetail" :placeholder="item.tip || '请输入'"
+            v-model="form[item.value]"></el-input>
+          <el-input type="textarea" v-if="item.type == 'textarea'" :readonly="isDetail" v-model="form[item.value]"
+            :placeholder="item.tip || '请输入'"></el-input>
 
-          <el-date-picker
-            style="width: 100%"
-            v-if="item.type == 'time'"
-            v-model="form[item.value]"
-            type="dates"
-            :placeholder="item.tip || '请选择时间'"
-          />
+          <el-date-picker style="width: 100%" v-if="item.type == 'time'" :readonly="isDetail" v-model="form[item.value]"
+            type="dates" :placeholder="item.tip || '请选择时间'" />
 
-          <el-select
-            v-if="item.type == 'select'"
-            v-model="form[item.value]"
-            :placeholder="item.tip || '请选择'"
-            style="width: 100%"
-          >
-            <el-option
-              v-for="item in item.options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            />
+          <el-select v-if="item.type == 'select'" v-model="form[item.value]" :placeholder="item.tip || '请选择'"
+            style="width: 100%">
+            <el-option v-for="item in item.options" :key="item.value" :label="item.label" :value="item.value" />
           </el-select>
         </el-form-item>
       </el-col>
       <div class="page-button">
-        <el-button type="primary" @click="handleAdd">确定</el-button>
+        <el-button type="primary" @click="handleAdd" v-if="!isDetail">确定</el-button>
         <el-button @click="handleBack">返回</el-button>
       </div>
     </el-form>
@@ -56,10 +27,13 @@
 <script setup>
 import { ElButton, ElForm, ElInput, ElFormItem, ElDatePicker, ElMessage } from 'element-plus'
 import { ContentWrap } from '@/components/ContentWrap'
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, onBeforeMount } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { addDispose, getOrgList } from '../apis'
 
 const router = useRouter()
+const route = useRoute()
+let isDetail = ref(false)
 
 let form = ref({
   type: '',
@@ -123,12 +97,29 @@ const formItemList = [
   }
 ]
 
+onBeforeMount(() => {
+  let query = route.query
+  if (query) {
+    isDetail.value = true
+  }
+})
+
+const getResponseData = async () => {
+  let res = await getOrgList()
+
+  if (res.code == 200) {
+    // responseData.list = res.data
+  } else {
+    // responseData.list = []
+  }
+}
+
 const handleAdd = async () => {
-  // let res = await addRiskHazardsApi(form)
-  // if (res.code == 200) {
-  //   ElMessage.success('新增成功')
-  //   handleBack()
-  // }
+  let res = await addDispose(form)
+  if (res.code == 200) {
+    ElMessage.success('新增成功')
+    handleBack()
+  }
 }
 
 const handleBack = () => {
@@ -143,9 +134,11 @@ const handleBack = () => {
   display: flex;
   flex-wrap: wrap;
 }
+
 .page-button {
   width: 100%;
   text-align: center;
+
   .el-button {
     width: 100px;
   }

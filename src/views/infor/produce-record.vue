@@ -2,7 +2,7 @@
   <ContentWrap class="mb-20">
     <el-button type="success" @click="handleAdd">新增</el-button>
   </ContentWrap>
-  <ContentWrap title="处置记录表">
+  <ContentWrap title="生产记录表">
     <el-table v-loading="loading" :data="responseData.list" height="400">
       <el-table-column prop="time" label="时间"></el-table-column>
       <el-table-column prop="classes" label="班次"></el-table-column>
@@ -23,22 +23,17 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination
-      v-model:current-page="responseData.pagenum"
-      v-model:page-size="responseData.pagesize"
-      layout="sizes,prev, pager, next"
-      :total="responseData.total"
-      :page-sizes="[10, 20, 30, 50]"
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-    />
+    <el-pagination v-model:current-page="responseData.pagenum" v-model:page-size="responseData.pagesize"
+      layout="sizes,prev, pager, next" :total="responseData.total" :page-sizes="[10, 20, 30, 50]"
+      @size-change="handleSizeChange" @current-change="handleCurrentChange" />
   </ContentWrap>
 </template>
 <script setup lang="ts">
 import { ElButton } from 'element-plus'
 import { ContentWrap } from '@/components/ContentWrap'
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { getProductList } from './apis'
 
 const loading = ref(false)
 
@@ -61,23 +56,29 @@ const handleCurrentChange = (val: number) => {
   getResponseData()
 }
 
+onMounted(() => {
+  getResponseData()
+})
+
 const getResponseData = async () => {
-  // let res = await getRiskHazardsApi({
-  //   pagesize: responseData.pagesize,
-  //   pagenum: responseData.pagenum,
-  //   type: responseData.type
-  // })
-  // if (res.code == 200) {
-  //   responseData.list = res.data
-  //   responseData.total = res.total
-  // } else {
-  //   responseData.list = []
-  //   responseData.total = 0
-  // }
+  let res = await getProductList({
+    pagesize: responseData.pagesize,
+    pagenum: responseData.pagenum,
+  })
+  if (res.code == 200) {
+    responseData.list = res.data
+    responseData.total = res.total
+  } else {
+    responseData.list = []
+    responseData.total = 0
+  }
 }
 
 const openDetail = (row) => {
-  console.log(row)
+  router.push({
+    path: '/infor/produce-record/add-produce-record',
+    query: row
+  })
 }
 
 const handleAdd = () => {
@@ -90,6 +91,7 @@ const handleAdd = () => {
   display: flex;
   justify-content: flex-end;
 }
+
 .el-pagination {
   margin-top: 10px;
 }
