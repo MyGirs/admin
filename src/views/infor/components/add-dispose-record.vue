@@ -1,5 +1,5 @@
 <template>
-  <ContentWrap title="新增值班记录">
+  <ContentWrap title="新增处置记录">
     <el-form :model="form" label-width="100">
       <el-col
         :xl="8"
@@ -30,6 +30,20 @@
             type="dates"
             :placeholder="item.tip || '请选择时间'"
           />
+
+          <el-select
+            v-if="item.type == 'select'"
+            v-model="form[item.value]"
+            :placeholder="item.tip || '请选择'"
+            style="width: 100%"
+          >
+            <el-option
+              v-for="item in item.options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
         </el-form-item>
       </el-col>
       <div class="page-button">
@@ -40,15 +54,37 @@
   </ContentWrap>
 </template>
 <script setup>
-import { ElButton, ElForm, ElInput, ElFormItem, ElDatePicker } from 'element-plus'
+import { ElButton, ElForm, ElInput, ElFormItem, ElDatePicker, ElMessage } from 'element-plus'
 import { ContentWrap } from '@/components/ContentWrap'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
-let form = ref({})
+let form = ref({
+  type: '',
+  dep: '',
+  time: '',
+  address: '',
+  party: '',
+  recordInfor: '',
+  opinion: '',
+  mark: ''
+})
 const formItemList = [
+  {
+    type: 'input',
+    value: 'type',
+    label: '主题或类型',
+    tip: '请输入主题或类型'
+  },
+  {
+    type: 'select',
+    value: 'dep',
+    label: '部门',
+    tip: '请选择部门',
+    options: []
+  },
   {
     type: 'time',
     value: 'time',
@@ -57,33 +93,33 @@ const formItemList = [
   },
   {
     type: 'input',
-    value: 'weather',
-    label: '天气',
-    tip: '请输入天气'
+    value: 'address',
+    label: '地址',
+    tip: '请输入地址'
   },
   {
     type: 'input',
-    value: 'user',
-    label: '值班领导',
-    tip: '请输入值班领导'
-  },
-  {
-    type: 'input',
-    value: 'route',
-    label: '路线',
-    tip: '请输入路线'
+    value: 'party',
+    label: '当事人',
+    tip: '请输入当事人'
   },
   {
     type: 'textarea',
-    value: 'content',
-    label: '内容',
-    tip: '请输入内容'
+    value: 'recordInfor',
+    label: '记录或详情',
+    tip: '请输入记录或详情'
   },
   {
     type: 'textarea',
-    value: 'handlingMeasures',
-    label: '处理措施',
-    tip: '请输入处理措施'
+    value: 'opinion',
+    label: '处理意见',
+    tip: '请输入处理意见'
+  },
+  {
+    type: 'textarea',
+    value: 'mark',
+    label: '备注',
+    tip: '请输入备注'
   }
 ]
 
@@ -97,7 +133,7 @@ const handleAdd = async () => {
 
 const handleBack = () => {
   router.push({
-    path: '/infor/duty-record'
+    path: '/infor/dispose-record'
   })
 }
 </script>

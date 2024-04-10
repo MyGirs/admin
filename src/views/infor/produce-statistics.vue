@@ -1,61 +1,54 @@
 <template>
-  <div class="search-warp">
-    <el-button type="primary" @click="handleAdd">新增</el-button>
-  </div>
-  <ContentWrap title="值班记录表">
+  <ContentWrap class="mb-20">
+    <el-button type="success" @click="handleAdd">新增</el-button>
+  </ContentWrap>
+  <ContentWrap title="生产统计表">
     <el-table v-loading="loading" :data="responseData.list" height="400">
-      <el-table-column prop="morningPlan" max-width="200px" show-overflow-tooltip label="早班计划"></el-table-column>
-      <el-table-column prop="morningSituation" max-width="200px" show-overflow-tooltip label="早班完成情况"></el-table-column>
-      <el-table-column prop="centrePlan" max-width="200px" show-overflow-tooltip label="中班计划"></el-table-column>
-      <el-table-column prop="centreSituation" max-width="200px" show-overflow-tooltip label="中班完成情况"></el-table-column>
-      <el-table-column prop="eveningPlan" max-width="200px" show-overflow-tooltip label="晚班计划"></el-table-column>
-      <el-table-column prop="eveningSituation" max-width="200px" show-overflow-tooltip label="晚班完成情况"></el-table-column>
-      <el-table-column prop="totalPlan" max-width="200px" show-overflow-tooltip label="合计计划"></el-table-column>
-      <el-table-column prop="totalSituation" max-width="200px" show-overflow-tooltip label="合计完成情况"></el-table-column>
+      <el-table-column prop="morningPlan" label="早计划"></el-table-column>
+      <el-table-column prop="morningSituation" label="早完成情况"></el-table-column>
+      <el-table-column prop="centrePlan" label="中班计划"></el-table-column>
+      <el-table-column prop="centreSituation" label="中班完成情况"></el-table-column>
+      <el-table-column prop="eveningPlan" label="晚班计划"></el-table-column>
+      <el-table-column prop="eveningSituation" label="晚班完成情况"></el-table-column>
+      <el-table-column prop="totalPlan" label="合计计划"></el-table-column>
+      <el-table-column prop="totalSituation" label="合计完成情况"></el-table-column>
       <el-table-column fixed="right" label="操作" width="80">
         <template #default="{ row }">
-          <el-button link type="primary" size="small" @click.prevent="goDetail(row)">
+          <el-button link type="primary" size="small" @click.prevent="openDetail(row)">
             详情
           </el-button>
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination layout="sizes,prev, pager, next" :total="responseData.total" :page-sizes="[10, 20, 30, 50]"
-      @size-change="handleSizeChange" @current-change="handleCurrentChange" />
+    <el-pagination
+      v-model:current-page="responseData.pagenum"
+      v-model:page-size="responseData.pagesize"
+      layout="sizes,prev, pager, next"
+      :total="responseData.total"
+      :page-sizes="[10, 20, 30, 50]"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+    />
   </ContentWrap>
-  <AddRecord v-model="addDialog" />
 </template>
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-import { ref, reactive, onMounted } from 'vue'
+import { ElButton } from 'element-plus'
 import { ContentWrap } from '@/components/ContentWrap'
-import AddRecord from './components/add-record.vue'
-import { getProduceStatisticApi } from "./api"
-const Router = useRouter()
+import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
+
 const loading = ref(false)
+
 const responseData = reactive({
+  list: [],
+  total: 0,
   pagesize: 10,
   pagenum: 1,
-  total: 0,
-  list: []
+  type: 1
 })
-const handleAdd = () => {
-  Router.push({
-    path: '/infor/produce-statistics-add',
-    query: {
-      type: 'add',
-    }
-  })
-}
-const goDetail = (row) => {
-  Router.push({
-    path: '/infor/produce-statistics-add',
-    query: {
-      type: 'detail',
-      formData: JSON.stringify(row)
-    }
-  })
-}
+
+const router = useRouter()
+
 const handleSizeChange = (val: number) => {
   responseData.pagesize = val
   getResponseData()
@@ -64,25 +57,37 @@ const handleCurrentChange = (val: number) => {
   responseData.pagenum = val
   getResponseData()
 }
+
 const getResponseData = async () => {
-  loading.value = true
-  let res = await getProduceStatisticApi({
-    pagesize: responseData.pagesize,
-    pagenum: responseData.pagenum
-  })
-  if (res.code == 200) {
-    responseData.list = res.data
-    responseData.total = res.total
-  }
-  loading.value = false
+  // let res = await getRiskHazardsApi({
+  //   pagesize: responseData.pagesize,
+  //   pagenum: responseData.pagenum,
+  //   type: responseData.type
+  // })
+  // if (res.code == 200) {
+  //   responseData.list = res.data
+  //   responseData.total = res.total
+  // } else {
+  //   responseData.list = []
+  //   responseData.total = 0
+  // }
 }
 
-onMounted(getResponseData)
+const openDetail = (row) => {
+  console.log(row)
+}
+
+const handleAdd = () => {
+  router.push('/infor/produce-statistics/add-produce-statistics')
+}
 </script>
 <style lang="less" scoped>
-.search-warp {
-  margin-bottom: 10px;
+.mb-20 {
+  margin-bottom: 20px;
   display: flex;
   justify-content: flex-end;
+}
+.el-pagination {
+  margin-top: 10px;
 }
 </style>
