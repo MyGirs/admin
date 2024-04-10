@@ -1,5 +1,5 @@
 <template>
-  <ContentWrap title="新增值班记录">
+  <ContentWrap title="新增处置记录">
     <el-form :model="form" label-width="100">
       <el-col
         :xl="8"
@@ -30,6 +30,20 @@
             type="dates"
             :placeholder="item.tip || '请选择时间'"
           />
+
+          <el-select
+            v-if="item.type == 'select'"
+            v-model="form[item.value]"
+            :placeholder="item.tip || '请选择'"
+            style="width: 100%"
+          >
+            <el-option
+              v-for="item in item.options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
         </el-form-item>
       </el-col>
       <div class="page-button">
@@ -40,50 +54,71 @@
   </ContentWrap>
 </template>
 <script setup>
-import { ElButton, ElForm, ElInput, ElFormItem, ElDatePicker } from 'element-plus'
+import { ElButton, ElForm, ElInput, ElFormItem, ElDatePicker, ElMessage } from 'element-plus'
 import { ContentWrap } from '@/components/ContentWrap'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
-let form = ref({})
+let form = ref({
+  morningPlan: '',
+  morningSituation: '',
+  centrePlan: '',
+  centreSituation: '',
+  eveningPlan: '',
+  eveningSituation: '',
+  totalPlan: '',
+  totalSituation: ''
+})
 const formItemList = [
   {
-    type: 'time',
-    value: 'time',
-    label: '时间',
-    tip: '请选时间'
-  },
-  {
-    type: 'input',
-    value: 'weather',
-    label: '天气',
-    tip: '请输入天气'
-  },
-  {
-    type: 'input',
-    value: 'user',
-    label: '值班领导',
-    tip: '请输入值班领导'
-  },
-  {
-    type: 'input',
-    value: 'route',
-    label: '路线',
-    tip: '请输入路线'
+    type: 'textarea',
+    value: 'morningPlan',
+    label: '早计划',
+    tip: '请输入早计划'
   },
   {
     type: 'textarea',
-    value: 'content',
-    label: '内容',
-    tip: '请输入内容'
+    value: 'morningSituation',
+    label: '早完成情况',
+    tip: '请输入早完成情况'
   },
   {
     type: 'textarea',
-    value: 'handlingMeasures',
-    label: '处理措施',
-    tip: '请输入处理措施'
+    value: 'centrePlan',
+    label: '中班计划',
+    tip: '请输入中班计划'
+  },
+  {
+    type: 'textarea',
+    value: 'centreSituation',
+    label: '中班完成情况',
+    tip: '请输入中班完成情况'
+  },
+  {
+    type: 'textarea',
+    value: 'eveningPlan',
+    label: '晚班计划',
+    tip: '请输入晚班计划'
+  },
+  {
+    type: 'textarea',
+    value: 'eveningSituation',
+    label: '晚班完成情况',
+    tip: '请输入晚班完成情况'
+  },
+  {
+    type: 'textarea',
+    value: 'totalPlan',
+    label: '合计计划',
+    tip: '请输入合计计划'
+  },
+  {
+    type: 'textarea',
+    value: 'totalSituation',
+    label: '合计完成情况',
+    tip: '请输入合计完成情况'
   }
 ]
 
@@ -97,7 +132,7 @@ const handleAdd = async () => {
 
 const handleBack = () => {
   router.push({
-    path: '/infor/duty-record'
+    path: '/infor/produce-statistics'
   })
 }
 </script>

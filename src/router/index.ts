@@ -178,7 +178,20 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
           title: '值班记录表',
           noCache: true,
           affix: false
-        }
+        },
+        children:[
+          {
+            path: 'add-record',
+            component: () => import('@/views/infor/components/add-record.vue'),
+            name: 'AddRecord',
+            meta: {
+              title: '值班记录表详情',
+              noCache: true,
+              affix: false,
+              hidden:true
+            },
+          }
+        ]
       },
       {
         path: 'dispose-record',
@@ -188,7 +201,20 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
           title: '处置记录',
           noCache: true,
           affix: false
-        }
+        },
+        children:[
+          {
+            path: 'add-dispose-record',
+            component: () => import('@/views/infor/components/add-dispose-record.vue'),
+            name: 'AddDisposeRecord',
+            meta: {
+              title: '处置记录详情',
+              noCache: true,
+              affix: false,
+              hidden:true
+            },
+          }
+        ]
       },
       {
         path: 'produce-record',
@@ -198,7 +224,20 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
           title: '生产记录',
           noCache: true,
           affix: false
-        }
+        },
+        children:[
+          {
+            path: 'add-produce-record',
+            component: () => import('@/views/infor/components/add-produce-record.vue'),
+            name: 'AddProduceRecord',
+            meta: {
+              title: '生产记录详情',
+              noCache: true,
+              affix: false,
+              hidden:true
+            },
+          }
+        ]
       },
       {
         path: 'produce-statistics',
@@ -208,7 +247,20 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
           title: '生产统计',
           noCache: true,
           affix: false
-        }
+        },
+        children:[
+          {
+            path: 'add-produce-statistics',
+            component: () => import('@/views/infor/components/add-produce-statistics.vue'),
+            name: 'AddProduceStatistics',
+            meta: {
+              title: '生产统计详情',
+              noCache: true,
+              affix: false,
+              hidden:true
+            },
+          }
+        ]
       }
     ]
   },
