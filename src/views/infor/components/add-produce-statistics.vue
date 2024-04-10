@@ -82,14 +82,14 @@ const formItemList = [
   {
     type: 'textarea',
     value: 'morningPlan',
-    label: '早计划',
-    tip: '请输入早计划'
+    label: '早班计划',
+    tip: '请输入早班计划'
   },
   {
     type: 'textarea',
     value: 'morningSituation',
-    label: '早完成情况',
-    tip: '请输入早完成情况'
+    label: '早班完成情况',
+    tip: '请输入早班完成情况'
   },
   {
     type: 'textarea',
