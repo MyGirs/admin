@@ -149,7 +149,59 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
             }
           }
         ]
+      }
+    ]
+  },
+  {
+    path: '/infor',
+    component: Layout,
+    name: 'Infor',
+    meta: {
+      title: '信息化管理',
+      icon: 'bx:bxs-component',
+      alwaysShow: true
+    },
+    children: [
+      {
+        path: 'duty-record',
+        component: () => import('@/views/infor/duty-record.vue'),
+        name: 'DutyRecord',
+        meta: {
+          title: '值班记录表',
+          noCache: true,
+          affix: true
+        }
       },
+      {
+        path: 'dispose-record',
+        component: () => import('@/views/infor/dispose-record.vue'),
+        name: 'DisposeRecord',
+        meta: {
+          title: '处置记录',
+          noCache: true,
+          affix: true
+        }
+      },
+      {
+        path: 'produce-record',
+        component: () => import('@/views/infor/produce-record.vue'),
+        name: 'ProduceRecord',
+        meta: {
+          title: '生产记录',
+          noCache: true,
+          affix: true
+        }
+      },
+      {
+        path: 'produce-statistics',
+        component: () => import('@/views/infor/produce-statistics.vue'),
+        name: 'ProduceStatistics',
+        meta: {
+          title: '生产统计',
+          noCache: true,
+          affix: true
+        }
+      }
     ]
   }
 ]
