@@ -1,6 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
-import { ElMessage, ElMessageBox } from 'element-plus'
-let isReFreshPadding = true
+import { ElMessage } from 'element-plus'
 const request = (config: AxiosRequestConfig) => {
   if (!config.headers) {
     config.headers = {}
