@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import type { App } from 'vue'
-import { Layout, getParentLayout } from '@/utils/routerHelper'
+import { Layout } from '@/utils/routerHelper'
 import { useI18n } from '@/hooks/web/useI18n'
 import { NO_RESET_WHITE_LIST } from '@/constants'
 
@@ -11,7 +11,7 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard/home',
+    redirect: '/infor/duty-record',
     name: 'Root',
     meta: {
       hidden: true
@@ -81,28 +81,10 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
 
 export const asyncRouterMap: AppRouteRecordRaw[] = [
   {
-    path: '/dashboard',
-    component: Layout,
-    redirect: '/dashboard/home',
-    name: 'Dashboard',
-    meta: {
-    },
-    children: [
-      {
-        path: 'home',
-        component: () => import('@/views/Dashboard/Analysis.vue'),
-        name: 'Home',
-        meta: {
-          title: '首页',
-          icon: 'ant-design:dashboard-filled',
-        }
-      },
-    ]
-  },
-  {
     path: '/infor',
     component: Layout,
     name: 'Infor',
+    redirect: '/infor/duty-record',
     meta: {
       title: '信息化管理',
       icon: 'clarity:document-solid',
@@ -118,7 +100,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
           noCache: true,
           affix: false
         },
-        children:[
+        children: [
           {
             path: 'add-record',
             component: () => import('@/views/infor/components/add-record.vue'),
@@ -127,8 +109,8 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
               title: '值班记录表详情',
               noCache: true,
               affix: false,
-              hidden:true
-            },
+              hidden: true
+            }
           }
         ]
       },
@@ -141,7 +123,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
           noCache: true,
           affix: false
         },
-        children:[
+        children: [
           {
             path: 'add-dispose-record',
             component: () => import('@/views/infor/components/add-dispose-record.vue'),
@@ -150,8 +132,8 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
               title: '处置记录详情',
               noCache: true,
               affix: false,
-              hidden:true
-            },
+              hidden: true
+            }
           }
         ]
       },
@@ -164,7 +146,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
           noCache: true,
           affix: false
         },
-        children:[
+        children: [
           {
             path: 'add-produce-record',
             component: () => import('@/views/infor/components/add-produce-record.vue'),
@@ -173,8 +155,8 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
               title: '生产记录详情',
               noCache: true,
               affix: false,
-              hidden:true
-            },
+              hidden: true
+            }
           }
         ]
       },
@@ -187,7 +169,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
           noCache: true,
           affix: false
         },
-        children:[
+        children: [
           {
             path: 'add-produce-statistics',
             component: () => import('@/views/infor/components/add-produce-statistics.vue'),
@@ -196,8 +178,8 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
               title: '生产统计详情',
               noCache: true,
               affix: false,
-              hidden:true
-            },
+              hidden: true
+            }
           }
         ]
       }
@@ -207,8 +189,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
     path: '/riskHazards',
     name: 'RiskHazards',
     component: Layout,
-    meta: {
-    },
+    meta: {},
     children: [
       {
         path: 'list',
@@ -216,7 +197,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         name: 'RiskHazardsList',
         meta: {
           title: '风险隐患信息化管理',
-          icon: 'ep:management',
+          icon: 'ep:management'
         }
       },
       {
@@ -236,8 +217,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
     path: '/productionWaring',
     name: 'ProductionWaring',
     component: Layout,
-    meta: {
-    },
+    meta: {},
     children: [
       {
         path: 'index',

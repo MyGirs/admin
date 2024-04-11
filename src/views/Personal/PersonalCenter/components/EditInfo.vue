@@ -22,22 +22,6 @@ const formSchema = reactive<FormSchema[]>([
     colProps: {
       span: 24
     }
-  },
-  {
-    field: 'phoneNumber',
-    label: '手机号码',
-    component: 'Input',
-    colProps: {
-      span: 24
-    }
-  },
-  {
-    field: 'email',
-    label: '邮箱',
-    component: 'Input',
-    colProps: {
-      span: 24
-    }
   }
 ])
 
@@ -60,7 +44,6 @@ watch(
     deep: true
   }
 )
-
 const saveLoading = ref(false)
 const save = async () => {
   const elForm = await getElFormExpose()
@@ -84,7 +67,7 @@ const save = async () => {
           saveLoading.value = false
         }
       })
-      .catch(() => {})
+      .catch(() => { })
   }
 }
 </script>
@@ -92,5 +75,5 @@ const save = async () => {
 <template>
   <Form :rules="rules" @register="formRegister" :schema="formSchema" />
   <ElDivider />
-  <BaseButton type="primary" @click="save">保存</BaseButton>
+  <!-- <BaseButton type="primary" @click="save">保存</BaseButton> -->
 </template>

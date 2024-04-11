@@ -51,15 +51,8 @@ const saveAvatar = async () => {
   <div class="flex w-100% h-100%">
     <ContentWrap title="个人信息" class="w-400px">
       <div class="flex justify-center items-center">
-        <div
-          class="avatar w-[150px] h-[150px] relative cursor-pointer"
-          @click="dialogVisible = true"
-        >
-          <ElImage
-            class="w-[150px] h-[150px] rounded-full"
-            :src="userInfo?.avatarUrl || defaultAvatar"
-            fit="fill"
-          />
+        <div class="avatar w-[150px] h-[150px] relative cursor-pointer" @click="dialogVisible = true">
+          <ElImage class="w-[150px] h-[150px] rounded-full" :src="userInfo?.avatarUrl || defaultAvatar" fit="fill" />
         </div>
       </div>
       <ElDivider />
@@ -72,8 +65,8 @@ const saveAvatar = async () => {
         <div>昵称：</div>
         <div>{{ userInfo?.realName }}</div>
       </div>
-      <ElDivider />
-      <div class="flex justify-between items-center">
+      <!-- <ElDivider /> -->
+      <!-- <div class="flex justify-between items-center">
         <div>手机号码：</div>
         <div>{{ userInfo?.phoneNumber ?? '-' }}</div>
       </div>
@@ -81,14 +74,13 @@ const saveAvatar = async () => {
       <div class="flex justify-between items-center">
         <div>用户邮箱：</div>
         <div>{{ userInfo?.email ?? '-' }}</div>
-      </div>
+      </div> -->
       <ElDivider />
       <div class="flex justify-between items-center">
         <div>所属角色：</div>
         <div>
           <template v-if="userInfo?.roleList?.length">
-            <ElTag v-for="item in userInfo?.roleList || []" :key="item" class="ml-2 mb-w"
-              >{{ item }}
+            <ElTag v-for="item in userInfo?.roleList || []" :key="item" class="ml-2 mb-w">{{ item }}
             </ElTag>
           </template>
           <template v-else>-</template>
@@ -101,9 +93,9 @@ const saveAvatar = async () => {
         <ElTabPane label="基本信息" name="first">
           <EditInfo :user-info="userInfo" />
         </ElTabPane>
-        <ElTabPane label="修改密码" name="second">
+        <!-- <ElTabPane label="修改密码" name="second">
           <EditPassword />
-        </ElTabPane>
+        </ElTabPane> -->
       </ElTabs>
     </ContentWrap>
   </div>
