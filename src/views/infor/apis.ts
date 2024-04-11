@@ -112,12 +112,12 @@ const addProduct = (data): Promise<any> => {
   })
 }
 // 生产统计列表查询
-const getStatisticsList = (data): Promise<any> => {
+const getStatisticsList = (params): Promise<any> => {
   return new Promise((resolve, reject) => {
     return HttpClient({
       url: '/api/getProduceStatistic',
-      method: 'post',
-      data
+      method: 'get',
+      params
     })
       .then((res) => {
         resolve(res)

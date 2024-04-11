@@ -20,7 +20,7 @@
       </el-form>
     </ContentWrap>
     <ContentWrap title="风险隐患信息化管理">
-      <el-table v-loading="loading" :data="responseData.list" height="400">
+      <el-table v-loading="loading" :data="responseData.list">
         <el-table-column prop="points" label="监测点位"></el-table-column>
         <el-table-column prop="position" label="监测位置"></el-table-column>
         <el-table-column prop="time" label="时间"></el-table-column>
@@ -86,7 +86,6 @@ const getResponseData = async () => {
     pagenum: responseData.pagenum,
     type: responseData.type
   })
-  console.log(res, '----res----')
   if (res.code == 200) {
 
     responseData.list = res.data
@@ -123,6 +122,10 @@ onMounted(getResponseData)
   .page-button {
     text-align: end;
   }
+}
+
+.el-table {
+  min-height: 200px
 }
 
 .el-pagination {
