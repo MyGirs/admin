@@ -24,6 +24,7 @@ onMounted(() => {
 watch(
   () => collapse.value,
   (collapse: boolean) => {
+
     if (unref(layout) === 'topLeft' || unref(layout) === 'cutMenu') {
       show.value = true
       return
@@ -55,7 +56,7 @@ watch(
       layout !== 'classic' ? `${prefixCls}__Top` : '',
       'flex !h-[var(--logo-height)] items-center cursor-pointer pl-8px relative decoration-none overflow-hidden'
     ]" to="/">
-      <img src="@/assets/imgs/logo.png" class="w-[calc(var(--logo-height)-10px)] h-[calc(var(--logo-height)-10px)]" />
+      <img src="@/assets/imgs/logo-1.jpg" class="w-[calc(var(--logo-height)-10px)] h-[calc(var(--logo-height)-10px)]" />
       <div v-if="show" :class="[
       'ml-10px text-16px font-700',
       {
