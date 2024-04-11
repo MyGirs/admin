@@ -4,7 +4,7 @@ import HttpClient from '@/axios'
 const getDutyList = (data): Promise<any> => {
   return new Promise((resolve, reject) => {
     return HttpClient({
-      url: '/api/getDutyRecord',
+      url: '/getDutyRecord',
       method: 'get',
       params: data
     })
@@ -20,7 +20,7 @@ const getDutyList = (data): Promise<any> => {
 const addDuty = (data): Promise<any> => {
   return new Promise((resolve, reject) => {
     return HttpClient({
-      url: '/api/addDutyRecord',
+      url: '/addDutyRecord',
       method: 'post',
       data
     })
@@ -36,7 +36,7 @@ const addDuty = (data): Promise<any> => {
 const getDisposeList = (data): Promise<any> => {
   return new Promise((resolve, reject) => {
     return HttpClient({
-      url: '/api/getDisposeRecord',
+      url: '/getDisposeRecord',
       method: 'get',
       params: data
     })
@@ -52,7 +52,7 @@ const getDisposeList = (data): Promise<any> => {
 const addDispose = (data): Promise<any> => {
   return new Promise((resolve, reject) => {
     return HttpClient({
-      url: '/api/addDisposeRecord',
+      url: '/addDisposeRecord',
       method: 'post',
       data
     })
@@ -68,7 +68,7 @@ const addDispose = (data): Promise<any> => {
 const getOrgList = (): Promise<any> => {
   return new Promise((resolve, reject) => {
     return HttpClient({
-      url: '/api/getDep',
+      url: '/getDep',
       method: 'get'
     })
       .then((res) => {
@@ -83,7 +83,7 @@ const getOrgList = (): Promise<any> => {
 const getProductList = (data): Promise<any> => {
   return new Promise((resolve, reject) => {
     return HttpClient({
-      url: '/api/getProduceRecord',
+      url: '/getProduceRecord',
       method: 'get',
       params: data
     })
@@ -99,7 +99,7 @@ const getProductList = (data): Promise<any> => {
 const addProduct = (data): Promise<any> => {
   return new Promise((resolve, reject) => {
     return HttpClient({
-      url: '/api/addProduceRecord',
+      url: '/addProduceRecord',
       method: 'post',
       data
     })
@@ -115,7 +115,7 @@ const addProduct = (data): Promise<any> => {
 const getStatisticsList = (params): Promise<any> => {
   return new Promise((resolve, reject) => {
     return HttpClient({
-      url: '/api/getProduceStatistic',
+      url: '/getProduceStatistic',
       method: 'get',
       params
     })
@@ -131,7 +131,7 @@ const getStatisticsList = (params): Promise<any> => {
 const addStatistics = (data): Promise<any> => {
   return new Promise((resolve, reject) => {
     return HttpClient({
-      url: '/api/addProduceStatistic',
+      url: '/addProduceStatistic',
       method: 'post',
       data
     })
