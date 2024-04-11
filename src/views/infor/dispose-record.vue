@@ -21,8 +21,8 @@
       </el-table-column>
     </el-table>
     <el-pagination v-model:current-page="responseData.pagenum" v-model:page-size="responseData.pagesize"
-                   layout="sizes,prev, pager, next" :total="responseData.total" :page-sizes="[10, 20, 30, 50]"
-                   @size-change="handleSizeChange" @current-change="handleCurrentChange" />
+      layout="sizes,prev, pager, next" :total="responseData.total" :page-sizes="[10, 20, 30, 50]"
+      @size-change="handleSizeChange" @current-change="handleCurrentChange" />
   </ContentWrap>
 </template>
 <script setup lang="ts">
@@ -58,10 +58,12 @@ onMounted(() => {
 })
 
 const getResponseData = async () => {
+  loading.value = true
   let res = await getDisposeList({
     pagesize: responseData.pagesize,
     pagenum: responseData.pagenum,
   })
+  loading.value = false
   if (res.code == 200) {
     responseData.list = res.data
     responseData.total = res.total

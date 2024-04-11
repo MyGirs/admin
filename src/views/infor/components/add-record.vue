@@ -4,16 +4,15 @@
       <el-col :xl="10" :lg="10" :md="12" :sm="12" :xs="24" v-for="(item, index) in formItemList" :key="index">
         <el-form-item :label="item.label">
           <el-input v-if="item.type == 'input'" :placeholder="item.tip || '请输入'" v-model="form[item.value]"
-                    :readonly="isDetail"></el-input>
+            :readonly="isDetail"></el-input>
           <el-input type="textarea" v-if="item.type == 'textarea'" v-model="form[item.value]"
-                    :placeholder="item.tip || '请输入'" :readonly="isDetail"></el-input>
+            :placeholder="item.tip || '请输入'" :readonly="isDetail"></el-input>
 
           <el-date-picker style="width: 100%" v-if="item.type == 'time'" v-model="form[item.value]"
-                          value-format="YYYY-MM-DD HH:mm:ss" type="datetime" :placeholder="item.tip || '请选择时间'"
-                          :readonly="isDetail" />
+            value-format="YYYY-MM-DD HH:mm:ss" type="datetime" :placeholder="item.tip || '请选择时间'" :readonly="isDetail" />
         </el-form-item>
       </el-col>
-      <div class="page-button">
+      <div class="page-button" v-loading="submitLoading">
         <el-button type="primary" @click="handleAdd" v-if="!isDetail">确定</el-button>
         <el-button @click="handleBack">返回</el-button>
       </div>
@@ -32,6 +31,7 @@ const router = useRouter()
 const route = useRoute()
 
 let form = ref({})
+const submitLoading = ref(false)
 let isDetail = ref(false)
 let title = ref('新增值班记录')
 
@@ -89,11 +89,18 @@ onBeforeMount(() => {
 })
 
 const handleAdd = async () => {
-  let res = await addDuty(form.value)
-  if (res.code == 200) {
-    ElMessage.success('新增成功')
-    handleBack()
+  submitLoading.value = true
+  try {
+    let res = await addDuty(form.value)
+    if (res.code == 200) {
+      ElMessage.success('新增成功')
+      submitLoading.value = false
+      handleBack()
+    }
+  } catch (error) {
+    submitLoading.value = false
   }
+
 }
 
 const handleBack = () => {

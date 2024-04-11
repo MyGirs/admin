@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="page" v-loading="loading">
     <ContentWrap style="margin-bottom: 20px;">
       <ElRow :gutter="20">
         <ElCol :xl="6" :lg="12" :md="12" :sm="12" :xs="24">
@@ -25,7 +25,7 @@
       </ElRow>
     </ContentWrap>
     <ContentWrap title="产量统计预警">
-      <el-table v-loading="loading" :data="responseData.list" height="400">
+      <el-table :data="responseData.list" height="400">
         <el-table-column prop="日期" min-width="180px" label="日期"></el-table-column>
         <el-table-column prop="班次" min-width="180px" label="班次"></el-table-column>
         <el-table-column prop="班组" min-width="180px" label="班组"></el-table-column>
@@ -76,16 +76,18 @@ const handleCurrentChange = (val: number) => {
   getResponseData()
 }
 const getResponseData = async () => {
-  let res = await getProductionWaringApi({
-    pagesize: responseData.pagesize,
-    pagenum: responseData.pagenum
-  })
-  console.log(res, 'getProductionWaringApi')
-  if (res.code == 0) {
+  loading.value = true
+  try {
+    let res = await getProductionWaringApi({
+      pagesize: responseData.pagesize,
+      pagenum: responseData.pagenum
+    })
     responseData.list = res.data.data.slice(0, 10)
-    responseData.total =
-      responseData.monthlyTarget = Math.floor(res.data.月目标产量)
+    responseData.monthlyTarget = Math.floor(res.data.月目标产量)
     responseData.monthlyActual = Math.floor(res.data.当月实际产量)
+    loading.value = false
+  } catch (error) {
+    loading.value = false
   }
 }
 

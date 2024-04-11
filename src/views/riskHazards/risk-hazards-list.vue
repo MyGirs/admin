@@ -42,7 +42,7 @@
         </el-table-column>
       </el-table>
       <el-pagination layout="sizes,prev, pager, next" :total="responseData.total" :page-sizes="[10, 20, 30, 50]"
-                     @size-change="handleSizeChange" @current-change="handleCurrentChange" />
+        @size-change="handleSizeChange" @current-change="handleCurrentChange" />
     </ContentWrap>
     <riskDialog v-model="dialogVisible" @submit="getResponseData" :selectRow="selectRow"></riskDialog>
   </div>
@@ -81,16 +81,18 @@ const handleCurrentChange = (val: number) => {
   getResponseData()
 }
 const getResponseData = async () => {
-  let res = await getRiskHazardsApi({
-    pagesize: responseData.pagesize,
-    pagenum: responseData.pagenum,
-    type: responseData.type
-  })
-  if (res.code == 200) {
-
+  loading.value = true
+  try {
+    let res = await getRiskHazardsApi({
+      pagesize: responseData.pagesize,
+      pagenum: responseData.pagenum,
+      type: responseData.type
+    })
     responseData.list = res.data
     responseData.total = res.total
-  } else {
+    loading.value = false
+  } catch (error) {
+    loading.value = false
     responseData.list = []
     responseData.total = 0
   }

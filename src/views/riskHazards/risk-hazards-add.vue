@@ -5,20 +5,19 @@
         <!-- <el-row > -->
         <el-col :xl="10" :lg="10" :md="12" :sm="12" :xs="24" v-for="(item, index) in formItemList" :key="index">
           <el-form-item :label="item.label">
-            <el-input v-if="item.type == 'input'" :placeholder="item.tip || '请输入'"
-                      v-model="form[item.value]"></el-input>
+            <el-input v-if="item.type == 'input'" :placeholder="item.tip || '请输入'" v-model="form[item.value]"></el-input>
             <el-input type="textarea" v-if="item.type == 'textarea'" v-model="form[item.value]"
-                      :placeholder="item.tip || '请输入'"></el-input>
+              :placeholder="item.tip || '请输入'"></el-input>
 
             <el-date-picker style="width: 100%" v-if="item.type == 'time'" v-model="form[item.value]" type="datetime"
-                            :placeholder="item.tip || '请选择时间'" value-format="YYYY-MM-DD HH:mm:ss" />
+              :placeholder="item.tip || '请选择时间'" value-format="YYYY-MM-DD HH:mm:ss" />
             <el-select v-if="item.type == 'select'" v-model="form[item.value]" :placeholder="item.tip || '请选择'"
-                       style="width: 100%">
+              style="width: 100%">
               <el-option v-for="item in item.options" :key="item.value" :label="item.label" :value="item.label" />
             </el-select>
           </el-form-item>
         </el-col>
-        <div class="page-button">
+        <div class="page-button" v-loading="submitLoading">
           <el-button type="primary" @click="handleAdd">确定</el-button>
           <el-button @click="handleBack">返回</el-button>
         </div>
@@ -37,7 +36,7 @@ import { formItemList } from "./commonField"
 import { parseMinWidth } from 'element-plus/es/components/table/src/util'
 import { onMounted } from 'vue'
 import moment from 'moment';
-
+const submitLoading = ref(false)
 const form = ref({
   points: '',
   position: '',
@@ -54,11 +53,15 @@ const form = ref({
 })
 const Router = useRouter()
 const handleAdd = async () => {
-  let params = JSON.parse(JSON.stringify(form.value))
-  let res = await addRiskHazardsApi({ ...params })
-  if (res.code == 200) {
+  submitLoading.value = true
+  try {
+    let params = JSON.parse(JSON.stringify(form.value))
+    let res = await addRiskHazardsApi({ ...params })
     ElMessage.success('新增成功')
     handleBack()
+    submitLoading.value = false
+  } catch (error) {
+    submitLoading.value = false
   }
 }
 const handleBack = () => {
