@@ -18,7 +18,7 @@ export const addRiskHazardsApi = (data) => {
 export const updatedRiskHazardsApi = (data) => {
   return HttpClient({
     url: '/api/updateRiskHazards',
-    method: 'post',
+    method: 'put',
     data
   })
 }

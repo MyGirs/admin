@@ -4,15 +4,12 @@ const request = (config: AxiosRequestConfig) => {
   if (!config.headers) {
     config.headers = {}
   }
-  config.headers['Authorization'] = '123456789'
-  config.headers['platform_code'] = '8ff998186633642c09a7767130e62b50'
-  config.headers['Content-Type'] = config.headers['Content-Type'] || 'application/json'
+  config.headers['Content-Type'] = 'application/json; charset=utf-8'
   return config
 }
 export const resSuccess = async (response: AxiosResponse) => {
   const { data, config } = response
   const res = data.result
-  console.log(res, '--res--')
   // code 码值处理
   if (res.code === '000000' || res.code === '0' || res.code === 200 || res.code === 0) {
     // 正常请求
