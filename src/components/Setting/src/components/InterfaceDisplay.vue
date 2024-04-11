@@ -168,11 +168,11 @@ watch(
       <span class="text-14px">{{ t('setting.sizeIcon') }}</span>
       <ElSwitch v-model="size" @change="sizeChange" />
     </div>
-
+    <!-- 
     <div class="flex justify-between items-center">
       <span class="text-14px">{{ t('setting.localeIcon') }}</span>
       <ElSwitch v-model="locale" @change="localeChange" />
-    </div>
+    </div> -->
 
     <div class="flex justify-between items-center">
       <span class="text-14px">{{ t('setting.tagsView') }}</span>
@@ -209,19 +209,19 @@ watch(
       <ElSwitch v-model="greyMode" @change="greyModeChange" />
     </div>
 
-    <div class="flex justify-between items-center">
+    <!-- <div class="flex justify-between items-center">
       <span class="text-14px">{{ t('setting.dynamicRouter') }}</span>
       <ElSwitch v-model="dynamicRouter" @change="dynamicRouterChange" />
-    </div>
+    </div> -->
 
-    <div class="flex justify-between items-center">
+    <!-- <div class="flex justify-between items-center">
       <span class="text-14px">{{ t('setting.serverDynamicRouter') }}</span>
       <ElSwitch v-model="serverDynamicRouter" @change="serverDynamicRouterChange" />
-    </div>
+    </div> -->
 
-    <div class="flex justify-between items-center">
+    <!-- <div class="flex justify-between items-center">
       <span class="text-14px">{{ t('setting.fixedMenu') }}</span>
       <ElSwitch v-model="fixedMenu" @change="fixedMenuChange" />
-    </div>
+    </div> -->
   </div>
 </template>

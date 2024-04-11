@@ -183,6 +183,7 @@ const signIn = async () => {
               addRoute(route as RouteRecordRaw) // 动态添加可访问路由表
             })
             permissionStore.setIsAddRouters(true)
+            console.log(permissionStore.addRouters, 'permissionStores')
             push({ path: permissionStore.addRouters[0].path })
           }
         }
@@ -216,5 +217,5 @@ const getRole = async () => {
 
 <template>
   <Form :schema="schema" :rules="rules" label-position="top" hide-required-asterisk size="large"
-    class="dark:(border-1 border-[var(--el-border-color)] border-solid)" @register="formRegister" />
+        class="dark:(border-1 border-[var(--el-border-color)] border-solid)" @register="formRegister" />
 </template>

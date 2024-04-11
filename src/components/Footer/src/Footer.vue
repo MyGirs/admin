@@ -13,10 +13,8 @@ const title = computed(() => appStore.getTitle)
 </script>
 
 <template>
-  <div
-    :class="prefixCls"
-    class="shrink-0 text-center text-[var(--el-text-color-placeholder)] bg-[var(--app-content-bg-color)] h-[var(--app-footer-height)] leading-[var(--app-footer-height)] dark:bg-[var(--el-bg-color)]"
-  >
-    Copyright ©2021-present {{ title }}
+  <div :class="prefixCls"
+       class="shrink-0 text-center text-[var(--el-text-color-placeholder)] bg-[var(--app-content-bg-color)] h-[var(--app-footer-height)] leading-[var(--app-footer-height)] dark:bg-[var(--el-bg-color)]">
+    {{ title }}
   </div>
 </template>
