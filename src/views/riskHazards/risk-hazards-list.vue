@@ -20,19 +20,19 @@
       </el-form>
     </ContentWrap>
     <ContentWrap title="风险隐患信息化管理">
-      <el-table v-loading="loading" :data="responseData.list">
+      <el-table v-loading="loading" :data="responseData.list" height="400">
         <el-table-column prop="points" label="监测点位"></el-table-column>
         <el-table-column prop="position" label="监测位置"></el-table-column>
-        <el-table-column prop="time" label="时间"></el-table-column>
+        <el-table-column prop="time" width="180" label="时间"></el-table-column>
         <el-table-column prop="type" label="类型"></el-table-column>
         <el-table-column prop="status" label="处理状态"></el-table-column>
         <el-table-column prop="deviceNum" label="设备型号"></el-table-column>
         <el-table-column prop="deviceModel" width="100" show-overflow-tooltip label="设备编号"></el-table-column>
         <el-table-column prop="versionNum" label="版本编号"></el-table-column>
-        <el-table-column prop="content" label="内容" width="100" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="content" label="内容" width="150" show-overflow-tooltip></el-table-column>
         <el-table-column prop="grade" label="等级"></el-table-column>
         <el-table-column prop="head" label="负责人"></el-table-column>
-        <el-table-column prop="handlingOpinions" width="100" show-overflow-tooltip label="处理意见"></el-table-column>
+        <el-table-column prop="handlingOpinions" width="150" show-overflow-tooltip label="处理意见"></el-table-column>
         <el-table-column fixed="right" label="操作" width="80">
           <template #default="{ row }">
             <el-button link type="primary" size="small" @click.prevent="openDialog(row)">
@@ -58,11 +58,11 @@ const loading = ref(false)
 const types = [
   {
     name: '风险',
-    value: 1
+    value: '风险'
   },
   {
     name: '隐患',
-    value: 2
+    value: '隐患'
   }
 ]
 const responseData = reactive({
@@ -70,7 +70,7 @@ const responseData = reactive({
   total: 0,
   pagesize: 10,
   pagenum: 1,
-  type: 1
+  type: '风险'
 })
 const handleSizeChange = (val: number) => {
   responseData.pagesize = val

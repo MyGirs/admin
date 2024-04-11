@@ -1,9 +1,11 @@
 import HttpClient from '@/axios'
 
-export const getProductionWaringApi = (data) => {
+//http://a01.xmbygy.com/api/services/app/YieldSJH/getProductionWaring
+export const getProductionWaringApi = (params) => {
   HttpClient({
-    url: '/api/getProductionWaring',
-    method: 'post',
-    data
+    url: '/getProductionWaring',
+    method: 'get',
+    params,
+    baseURL: 'http://a01.xmbygy.com/api/services/app/YieldSJH'
   })
 }

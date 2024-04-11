@@ -3,7 +3,7 @@
     <ContentWrap title="新增风险/隐患">
       <el-form label-width="100">
         <!-- <el-row > -->
-        <el-col :xl="8" :lg="10" :md="12" :sm="12" :xs="24" v-for="(item, index) in formItemList" :key="index">
+        <el-col :xl="10" :lg="10" :md="12" :sm="12" :xs="24" v-for="(item, index) in formItemList" :key="index">
           <el-form-item :label="item.label">
             <el-input v-if="item.type == 'input'" :placeholder="item.tip || '请输入'"
                       v-model="form[item.value]"></el-input>
@@ -14,7 +14,7 @@
                             :placeholder="item.tip || '请选择时间'" value-format="YYYY-MM-DD HH:mm:ss" />
             <el-select v-if="item.type == 'select'" v-model="form[item.value]" :placeholder="item.tip || '请选择'"
                        style="width: 100%">
-              <el-option v-for="item in item.options" :key="item.value" :label="item.label" :value="item.value" />
+              <el-option v-for="item in item.options" :key="item.value" :label="item.label" :value="item.label" />
             </el-select>
           </el-form-item>
         </el-col>
@@ -36,10 +36,10 @@ import { addRiskHazardsApi } from './api'
 import { formItemList } from "./commonField"
 import { parseMinWidth } from 'element-plus/es/components/table/src/util'
 
-const form = reactive({
+const form = ref({
   points: '',
   position: '',
-  time: [],
+  time: '',
   type: '',
   status: '',
   deviceNum: '',
@@ -52,9 +52,9 @@ const form = reactive({
 })
 const Router = useRouter()
 const handleAdd = async () => {
-  let params = JSON.parse(JSON.stringify(form))
-  params.time = form[0] || ''
-  let res = await addRiskHazardsApi({ data: params })
+  let params = JSON.parse(JSON.stringify(form.value))
+  console.log(params)
+  let res = await addRiskHazardsApi({ ...params })
   if (res.code == 200) {
     ElMessage.success('新增成功')
     handleBack()

@@ -8,6 +8,7 @@ export const getRiskHazardsApi = (params): Promise<any> => {
 }
 
 export const addRiskHazardsApi = (data) => {
+  console.log(data)
   return HttpClient({
     url: '/addRiskHazards',
     method: 'post',
