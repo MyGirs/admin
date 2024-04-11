@@ -35,7 +35,7 @@ export const responseError = (error: AxiosError) => {
   return Promise.reject(error)
 }
 const HttpClient = axios.create({
-  baseURL: import.meta.env.VITE_APP_BASE_URL
+  baseURL: import.meta.env.VITE_API_BASE_PATH
 })
 
 HttpClient.interceptors.request.use(

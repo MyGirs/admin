@@ -1,7 +1,7 @@
 import HttpClient from '@/axios'
 export const getRiskHazardsApi = (params): Promise<any> => {
   return HttpClient({
-    url: '/api/getRiskHazards',
+    url: '/getRiskHazards',
     method: 'get',
     params
   })
@@ -9,7 +9,7 @@ export const getRiskHazardsApi = (params): Promise<any> => {
 
 export const addRiskHazardsApi = (data) => {
   return HttpClient({
-    url: '/api/addRiskHazards',
+    url: '/addRiskHazards',
     method: 'post',
     data
   })
@@ -17,7 +17,7 @@ export const addRiskHazardsApi = (data) => {
 
 export const updatedRiskHazardsApi = (data) => {
   return HttpClient({
-    url: '/api/updateRiskHazards',
+    url: '/updateRiskHazards',
     method: 'put',
     data
   })
