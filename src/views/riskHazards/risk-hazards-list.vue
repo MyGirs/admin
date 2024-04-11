@@ -42,7 +42,7 @@
         </el-table-column>
       </el-table>
       <el-pagination layout="sizes,prev, pager, next" :total="responseData.total" :page-sizes="[10, 20, 30, 50]"
-        @size-change="handleSizeChange" @current-change="handleCurrentChange" />
+                     @size-change="handleSizeChange" @current-change="handleCurrentChange" />
     </ContentWrap>
     <riskDialog v-model="dialogVisible" @submit="getResponseData" :selectRow="selectRow"></riskDialog>
   </div>
@@ -86,7 +86,9 @@ const getResponseData = async () => {
     pagenum: responseData.pagenum,
     type: responseData.type
   })
+  console.log(res, '----res----')
   if (res.code == 200) {
+
     responseData.list = res.data
     responseData.total = res.total
   } else {

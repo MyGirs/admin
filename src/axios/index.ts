@@ -11,10 +11,12 @@ const request = (config: AxiosRequestConfig) => {
 }
 export const resSuccess = async (response: AxiosResponse) => {
   const { data, config } = response
+  const res = data.result
+  console.log(res, '--res--')
   // code 码值处理
-  if (data.code === '000000' || data.code === '0' || data.code === 200 || data.code === 0) {
+  if (res.code === '000000' || res.code === '0' || res.code === 200 || res.code === 0) {
     // 正常请求
-    return data
+    return res
   } else if (
     (config.url === '/file/download' && response.status === 200) ||
     (response.data.type == 'application/vnd.ms-excel' && response.status === 200)
@@ -22,15 +24,15 @@ export const resSuccess = async (response: AxiosResponse) => {
     return response
   } else {
     ElMessage.error({
-      message: data.msg || data.message || data.description || data.code || 'Error',
+      message: res.msg || res.message || '服务错误 请联系管理员',
       duration: 5 * 1000
     })
-    return Promise.reject(data)
+    return Promise.reject(res)
   }
 }
 export const responseError = (error: AxiosError) => {
   ElMessage.error({
-    message: error.message,
+    message: error.message || error.msg,
     duration: 5 * 1000
   })
   return Promise.reject(error)

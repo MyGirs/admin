@@ -40,7 +40,7 @@ export const useAppStore = defineStore('app', {
     return {
       sizeMap: ['default', 'large', 'small'],
       mobile: false, // 是否是移动端
-      title: import.meta.env.VITE_APP_TITLE, // 标题
+      title: '', // 标题
       pageLoading: false, // 路由跳转loading
       breadcrumb: true, // 面包屑
       breadcrumbIcon: true, // 面包屑图标
@@ -152,7 +152,7 @@ export const useAppStore = defineStore('app', {
       return this.layout
     },
     getTitle(): string {
-      return this.title
+      return import.meta.env.VITE_APP_TITLE
     },
     getIsDark(): boolean {
       return this.isDark

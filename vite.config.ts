@@ -42,20 +42,20 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       progress(),
       env.VITE_USE_ALL_ELEMENT_PLUS_STYLE === 'false'
         ? createStyleImportPlugin({
-          resolves: [ElementPlusResolve()],
-          libs: [
-            {
-              libraryName: 'element-plus',
-              esModule: true,
-              resolveStyle: (name) => {
-                if (name === 'click-outside') {
-                  return ''
+            resolves: [ElementPlusResolve()],
+            libs: [
+              {
+                libraryName: 'element-plus',
+                esModule: true,
+                resolveStyle: (name) => {
+                  if (name === 'click-outside') {
+                    return ''
+                  }
+                  return `element-plus/es/components/${name.replace(/^el-/, '')}/style/css`
                 }
-                return `element-plus/es/components/${name.replace(/^el-/, '')}/style/css`
               }
-            }
-          ]
-        })
+            ]
+          })
         : undefined,
 
       VueI18nPlugin({
@@ -71,16 +71,16 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       PurgeIcons(),
       env.VITE_USE_MOCK === 'true'
         ? viteMockServe({
-          ignore: /^\_/,
-          mockPath: 'mock',
-          localEnabled: !isBuild,
-          prodEnabled: isBuild,
-          injectCode: `
+            ignore: /^\_/,
+            mockPath: 'mock',
+            localEnabled: !isBuild,
+            prodEnabled: isBuild,
+            injectCode: `
           import { setupProdMockServer } from '../mock/_createProductionServer'
 
           setupProdMockServer()
           `
-        })
+          })
         : undefined,
       ViteEjsPlugin({
         title: env.VITE_APP_TITLE
@@ -135,7 +135,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       proxy: {
         // 选项写法
         '/api': {
-          target: 'http://127.0.0.1:8000',
+          target: 'http://aq.xmbygy.com/api/services/app/SafetyQualityStandardization/',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, '')
         }
