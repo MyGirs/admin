@@ -20,7 +20,7 @@
   </ContentWrap>
 </template>
 <script setup>
-import { ElButton, ElForm, ElInput, ElFormItem, ElDatePicker } from 'element-plus'
+import { ElButton, ElForm, ElInput, ElFormItem, ElDatePicker, ElMessage } from 'element-plus'
 import { ContentWrap } from '@/components/ContentWrap'
 import { ref, onBeforeMount } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
@@ -73,7 +73,7 @@ const formItemList = [
 
 onBeforeMount(() => {
   let query = route.query
-  if (query) {
+  if (JSON.stringify(query) != "{}") {
     isDetail.value = true
   }
 })

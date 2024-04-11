@@ -99,9 +99,10 @@ const formItemList = [
 
 onBeforeMount(() => {
   let query = route.query
-  if (query) {
+  if (JSON.stringify(query) != "{}") {
     isDetail.value = true
   }
+  getResponseData()
 })
 
 const getResponseData = async () => {

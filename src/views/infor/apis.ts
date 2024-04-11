@@ -5,8 +5,8 @@ const getDutyList = (data): Promise<any> => {
   return new Promise((resolve, reject) => {
     return HttpClient({
       url: '/api/getDutyRecord',
-      method: 'post',
-      data
+      method: 'get',
+      params: data
     })
       .then((res) => {
         resolve(res)
@@ -37,8 +37,8 @@ const getDisposeList = (data): Promise<any> => {
   return new Promise((resolve, reject) => {
     return HttpClient({
       url: '/api/getDisposeRecord',
-      method: 'post',
-      data
+      method: 'get',
+      params: data
     })
       .then((res) => {
         resolve(res)
@@ -84,8 +84,8 @@ const getProductList = (data): Promise<any> => {
   return new Promise((resolve, reject) => {
     return HttpClient({
       url: '/api/getProduceRecord',
-      method: 'post',
-      data
+      method: 'get',
+      params: data
     })
       .then((res) => {
         resolve(res)
@@ -116,8 +116,8 @@ const getStatisticsList = (data): Promise<any> => {
   return new Promise((resolve, reject) => {
     return HttpClient({
       url: '/api/getProduceStatistic',
-      method: 'post',
-      data
+      method: 'get',
+      params: data
     })
       .then((res) => {
         resolve(res)
