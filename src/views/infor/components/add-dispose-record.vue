@@ -1,5 +1,5 @@
 <template>
-  <ContentWrap title="新增处置记录">
+  <ContentWrap :title="title">
     <el-form :model="form" label-width="100">
       <el-col :xl="8" :lg="10" :md="12" :sm="12" :xs="24" v-for="(item, index) in formItemList" :key="index">
         <el-form-item :label="item.label">
@@ -9,7 +9,7 @@
             :placeholder="item.tip || '请输入'"></el-input>
 
           <el-date-picker style="width: 100%" v-if="item.type == 'time'" :readonly="isDetail" v-model="form[item.value]"
-            type="dates" :placeholder="item.tip || '请选择时间'" />
+            type="date" :placeholder="item.tip || '请选择时间'" value-format="YYYY-MM-DD" />
 
           <el-select v-if="item.type == 'select'" v-model="form[item.value]" :placeholder="item.tip || '请选择'"
             style="width: 100%">
@@ -34,18 +34,10 @@ import { addDispose, getOrgList } from '../apis'
 const router = useRouter()
 const route = useRoute()
 let isDetail = ref(false)
+let title = ref("新增处置记录")
 
-let form = ref({
-  type: '',
-  dep: '',
-  time: '',
-  address: '',
-  party: '',
-  recordInfor: '',
-  opinion: '',
-  mark: ''
-})
-const formItemList = [
+let form = ref({})
+const formItemList = ref([
   {
     type: 'input',
     value: 'type',
@@ -95,12 +87,17 @@ const formItemList = [
     label: '备注',
     tip: '请输入备注'
   }
-]
+])
 
 onBeforeMount(() => {
   let query = route.query
-  if (JSON.stringify(query) != "{}") {
+  if (query.type == 'detail') {
     isDetail.value = true
+    title.value = '处置记录详情'
+    let params = JSON.parse(query.row)
+    for (var key in params) {
+      form.value[key] = params[key]
+    }
   }
   getResponseData()
 })
@@ -109,14 +106,29 @@ const getResponseData = async () => {
   let res = await getOrgList()
 
   if (res.code == 200) {
-    // responseData.list = res.data
+    formItemList.value.map(item => {
+      if (item.value == 'dep') {
+        item.options = res.data.map(ite => {
+          return {
+            value: ite.name,
+            label: ite.name
+          }
+        })
+      }
+      return item
+    })
   } else {
-    // responseData.list = []
+    formItemList.value.map(item => {
+      if (item.value == 'dep') {
+        item.options = []
+      }
+      return item
+    })
   }
 }
 
 const handleAdd = async () => {
-  let res = await addDispose(form)
+  let res = await addDispose(form.value)
   if (res.code == 200) {
     ElMessage.success('新增成功')
     handleBack()

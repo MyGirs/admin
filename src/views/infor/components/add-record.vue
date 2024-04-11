@@ -1,5 +1,5 @@
 <template>
-  <ContentWrap title="新增值班记录">
+  <ContentWrap :title="title">
     <el-form :model="form" label-width="100">
       <el-col :xl="8" :lg="10" :md="12" :sm="12" :xs="24" v-for="(item, index) in formItemList" :key="index">
         <el-form-item :label="item.label">
@@ -8,8 +8,8 @@
           <el-input type="textarea" v-if="item.type == 'textarea'" v-model="form[item.value]"
             :placeholder="item.tip || '请输入'" :readonly="isDetail"></el-input>
 
-          <el-date-picker style="width: 100%" v-if="item.type == 'time'" v-model="form[item.value]" type="dates"
-            :placeholder="item.tip || '请选择时间'" :readonly="isDetail" />
+          <el-date-picker style="width: 100%" v-if="item.type == 'time'" v-model="form[item.value]" type="date"
+            :placeholder="item.tip || '请选择时间'" value-format="YYYY-MM-DD" :readonly="isDetail" />
         </el-form-item>
       </el-col>
       <div class="page-button">
@@ -31,6 +31,7 @@ const route = useRoute()
 
 let form = ref({})
 let isDetail = ref(false)
+let title = ref('新增值班记录')
 
 const formItemList = [
   {
@@ -73,13 +74,18 @@ const formItemList = [
 
 onBeforeMount(() => {
   let query = route.query
-  if (JSON.stringify(query) != "{}") {
+  if (query.type == 'detail') {
     isDetail.value = true
+    title.value = "值班记录详情"
+    let params = JSON.parse(query.row)
+    for (var key in params) {
+      form.value[key] = params[key]
+    }
   }
 })
 
 const handleAdd = async () => {
-  let res = await addDuty(form)
+  let res = await addDuty(form.value)
   if (res.code == 200) {
     ElMessage.success('新增成功')
     handleBack()

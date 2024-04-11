@@ -1,18 +1,18 @@
 <template>
-  <ContentWrap title="新增处置记录">
+  <ContentWrap :title="title">
     <el-form :model="form" label-width="100">
       <el-col :xl="8" :lg="10" :md="12" :sm="12" :xs="24" v-for="(item, index) in formItemList" :key="index">
         <el-form-item :label="item.label">
           <el-input v-if="item.type == 'input'" :placeholder="item.tip || '请输入'" v-model="form[item.value]"
-                    :readonly="isDetail"></el-input>
+            :readonly="isDetail"></el-input>
           <el-input type="textarea" v-if="item.type == 'textarea'" v-model="form[item.value]"
-                    :placeholder="item.tip || '请输入'" :readonly="isDetail"></el-input>
+            :placeholder="item.tip || '请输入'" :readonly="isDetail"></el-input>
 
-          <el-date-picker style="width: 100%" v-if="item.type == 'time'" v-model="form[item.value]" type="dates"
-                          :placeholder="item.tip || '请选择时间'" :readonly="isDetail" />
+          <el-date-picker style="width: 100%" v-if="item.type == 'time'" v-model="form[item.value]" type="date"
+            :placeholder="item.tip || '请选择时间'" value-format="YYYY-MM-DD" :readonly="isDetail" />
 
           <el-select v-if="item.type == 'select'" v-model="form[item.value]" :placeholder="item.tip || '请选择'"
-                     style="width: 100%">
+            style="width: 100%">
             <el-option v-for="item in item.options" :key="item.value" :label="item.label" :value="item.value" />
           </el-select>
         </el-form-item>
@@ -35,6 +35,7 @@ const router = useRouter()
 const route = useRoute()
 
 let isDetail = ref(false)
+let title = ref('新增处置记录')
 
 let form = ref({
   morningPlan: '',
@@ -98,10 +99,12 @@ const formItemList = [
 ]
 onBeforeMount(() => {
   let query = route.query
-  if (JSON.stringify(query) != '{}') {
+  if (query.type == 'detail') {
     isDetail.value = true
-    for (var key in query) {
-      form.value[key] = query[key]
+    title.value = '处置记录详情'
+    let params = JSON.parse(query.row)
+    for (var key in params) {
+      form.value[key] = params[key]
     }
   }
 })

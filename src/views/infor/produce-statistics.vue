@@ -81,7 +81,10 @@ const getResponseData = async () => {
 const openDetail = (row) => {
   router.push({
     path: '/infor/produce-statistics/add-produce-statistics',
-    query: row
+    query: {
+      type: 'detail',
+      row: JSON.stringify(row)
+    }
   })
 }
 

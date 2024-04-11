@@ -74,7 +74,10 @@ const getResponseData = async () => {
 const openDetail = (row) => {
   router.push({
     path: '/infor/dispose-record/add-dispose-record',
-    query: row
+    query: {
+      type: 'detail',
+      row: JSON.stringify(row)
+    }
   })
 }
 

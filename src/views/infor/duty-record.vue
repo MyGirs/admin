@@ -72,7 +72,10 @@ const getResponseData = async () => {
 const openDetail = (row) => {
   router.push({
     path: '/infor/duty-record/add-record',
-    query: row
+    query: {
+      type: 'detail',
+      row: JSON.stringify(row)
+    }
   })
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <ContentWrap title="新增生产记录">
+  <ContentWrap :title="title">
     <el-form :model="form" label-width="100">
       <el-col :xl="8" :lg="10" :md="12" :sm="12" :xs="24" v-for="(item, index) in formItemList" :key="index">
         <el-form-item :label="item.label">
@@ -9,7 +9,7 @@
             :placeholder="item.tip || '请输入'"></el-input>
 
           <el-date-picker style="width: 100%" v-if="item.type == 'time'" :readonly="isDetail" v-model="form[item.value]"
-            type="dates" :placeholder="item.tip || '请选择时间'" />
+            type="date" :placeholder="item.tip || '请选择时间'" value-format="YYYY-MM-DD" />
 
           <el-select v-if="item.type == 'select'" v-model="form[item.value]" :placeholder="item.tip || '请选择'"
             style="width: 100%">
@@ -35,6 +35,7 @@ const router = useRouter()
 const route = useRoute()
 
 let isDetail = ref(false)
+let title = ref('新增生产记录')
 let form = ref({
   time: '',
   classes: '',
@@ -62,15 +63,15 @@ const formItemList = [
     tip: '请选择班次',
     options: [
       {
-        value: '1',
+        value: '早班',
         label: '早班'
       },
       {
-        value: '2',
+        value: '中班',
         label: '中班'
       },
       {
-        value: '3',
+        value: '夜班',
         label: '夜班'
       }
     ]
@@ -134,13 +135,18 @@ const formItemList = [
 
 onBeforeMount(() => {
   let query = route.query
-  if (JSON.stringify(query) != "{}") {
+  if (query.type == 'detail') {
     isDetail.value = true
+    title.value = '生产记录详情'
+    let params = JSON.parse(query.row)
+    for (var key in params) {
+      form.value[key] = params[key]
+    }
   }
 })
 
 const handleAdd = async () => {
-  let res = await addProduct(form)
+  let res = await addProduct(form.value)
   if (res.code == 200) {
     ElMessage.success('新增成功')
     handleBack()
