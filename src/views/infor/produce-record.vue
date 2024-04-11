@@ -4,7 +4,7 @@
   </ContentWrap>
   <ContentWrap title="生产记录表">
     <el-table v-loading="loading" :data="responseData.list" height="400">
-      <el-table-column prop="time" label="时间"></el-table-column>
+      <el-table-column prop="time" label="时间" :formatter="formatter"></el-table-column>
       <el-table-column prop="classes" label="班次"></el-table-column>
       <el-table-column prop="address" label="地址"></el-table-column>
       <el-table-column prop="dispatcher" label="调度员"></el-table-column>
@@ -34,6 +34,7 @@ import { ContentWrap } from '@/components/ContentWrap'
 import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { getProductList } from './apis'
+import moment from 'moment'
 
 const loading = ref(false)
 
@@ -72,6 +73,11 @@ const getResponseData = async () => {
     responseData.list = []
     responseData.total = 0
   }
+}
+
+const formatter = (row) => {
+  let t = moment(row.time).format('YYYY-MM_DD')
+  return t
 }
 
 const openDetail = (row) => {

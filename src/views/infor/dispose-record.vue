@@ -6,7 +6,7 @@
     <el-table v-loading="loading" :data="responseData.list" height="400">
       <el-table-column prop="type" label="主题或类型"></el-table-column>
       <el-table-column prop="dep" label="部门"></el-table-column>
-      <el-table-column prop="time" label="时间"></el-table-column>
+      <el-table-column prop="time" label="时间" :formatter="formatter"></el-table-column>
       <el-table-column prop="address" label="地址"></el-table-column>
       <el-table-column prop="party" label="当事人"></el-table-column>
       <el-table-column prop="recordInfor" label="记录或详情"></el-table-column>
@@ -31,6 +31,7 @@ import { ContentWrap } from '@/components/ContentWrap'
 import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { getDisposeList } from './apis'
+import moment from 'moment'
 
 const loading = ref(false)
 
@@ -69,6 +70,11 @@ const getResponseData = async () => {
     responseData.list = []
     responseData.total = 0
   }
+}
+
+const formatter = (row) => {
+  let t = moment(row.time).format('YYYY-MM_DD')
+  return t
 }
 
 const openDetail = (row) => {
