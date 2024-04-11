@@ -21,18 +21,18 @@
     </ContentWrap>
     <ContentWrap title="风险隐患信息化管理">
       <el-table v-loading="loading" :data="responseData.list" height="400">
-        <el-table-column prop="points" label="监测点位"></el-table-column>
-        <el-table-column prop="position" label="监测位置"></el-table-column>
-        <el-table-column prop="time" width="180" label="时间"></el-table-column>
-        <el-table-column prop="type" label="类型"></el-table-column>
-        <el-table-column prop="status" label="处理状态"></el-table-column>
-        <el-table-column prop="deviceNum" label="设备型号"></el-table-column>
-        <el-table-column prop="deviceModel" width="100" show-overflow-tooltip label="设备编号"></el-table-column>
-        <el-table-column prop="versionNum" label="版本编号"></el-table-column>
-        <el-table-column prop="content" label="内容" width="150" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="points" min-width="120px" label="监测点位"></el-table-column>
+        <el-table-column prop="position" min-width="120px" label="监测位置"></el-table-column>
+        <el-table-column prop="time" min-width="180px" label="时间"></el-table-column>
+        <el-table-column prop="type" min-width="100px" label="类型"></el-table-column>
+        <el-table-column prop="status" min-width="100px" label="处理状态"></el-table-column>
+        <el-table-column prop="deviceNum" min-width="100px" label="设备型号"></el-table-column>
+        <el-table-column prop="deviceModel" min-width="100px" show-overflow-tooltip label="设备编号"></el-table-column>
+        <el-table-column prop="versionNum" min-width="100px" label="版本编号"></el-table-column>
+        <el-table-column prop="content" label="内容" min-width="100px" show-overflow-tooltip></el-table-column>
         <el-table-column prop="grade" label="等级"></el-table-column>
         <el-table-column prop="head" label="负责人"></el-table-column>
-        <el-table-column prop="handlingOpinions" width="150" show-overflow-tooltip label="处理意见"></el-table-column>
+        <el-table-column prop="handlingOpinions" min-width="100px" show-overflow-tooltip label="处理意见"></el-table-column>
         <el-table-column fixed="right" label="操作" width="80">
           <template #default="{ row }">
             <el-button link type="primary" size="small" @click.prevent="openDialog(row)">

@@ -26,15 +26,15 @@
     </ContentWrap>
     <ContentWrap title="产量统计预警">
       <el-table v-loading="loading" :data="responseData.list" height="400">
-        <el-table-column prop="time" label="日期"></el-table-column>
-        <el-table-column prop="classes" label="班次"></el-table-column>
-        <el-table-column prop="groups" label="班组"></el-table-column>
-        <el-table-column prop="startTotal" label="始累计数"></el-table-column>
-        <el-table-column prop="endTotal" label="终累计数"></el-table-column>
-        <el-table-column prop="weight" label="重量"></el-table-column>
+        <el-table-column prop="日期" min-width="180px" label="日期"></el-table-column>
+        <el-table-column prop="班次" min-width="180px" label="班次"></el-table-column>
+        <el-table-column prop="班组" min-width="180px" label="班组"></el-table-column>
+        <el-table-column prop="始累计数" min-width="180px" label="始累计数"></el-table-column>
+        <el-table-column prop="终累计数" min-width="180px" label="终累计数"></el-table-column>
+        <el-table-column prop="重量" min-width="180px" label="重量"></el-table-column>
       </el-table>
-      <el-pagination layout="prev, pager, next" :total="responseData.total" @size-change="handleSizeChange"
-        @current-change="handleCurrentChange" />
+      <!-- <el-pagination layout="prev, pager, next" :total="responseData.total" @size-change="handleSizeChange"
+                     @current-change="handleCurrentChange" /> -->
     </ContentWrap>
   </div>
 </template>
@@ -80,12 +80,12 @@ const getResponseData = async () => {
     pagesize: responseData.pagesize,
     pagenum: responseData.pagenum
   })
-  if (res.code == 200) {
-    const { list, total, waring } = res.data
-    responseData.list = list
-    responseData.total = total
-    responseData.monthlyTarget = waring.monthlyTarget
-    responseData.monthlyActual = waring.monthlyActual
+  console.log(res, 'getProductionWaringApi')
+  if (res.code == 0) {
+    responseData.list = res.data.data.slice(0, 10)
+    responseData.total =
+      responseData.monthlyTarget = Math.floor(res.data.月目标产量)
+    responseData.monthlyActual = Math.floor(res.data.当月实际产量)
   }
 }
 

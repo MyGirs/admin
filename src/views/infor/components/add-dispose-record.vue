@@ -1,18 +1,18 @@
 <template>
   <ContentWrap :title="title">
     <el-form :model="form" label-width="100">
-      <el-col :xl="8" :lg="10" :md="12" :sm="12" :xs="24" v-for="(item, index) in formItemList" :key="index">
+      <el-col :xl="10" :lg="10" :md="12" :sm="12" :xs="24" v-for="(item, index) in formItemList" :key="index">
         <el-form-item :label="item.label">
           <el-input v-if="item.type == 'input'" :readonly="isDetail" :placeholder="item.tip || '请输入'"
-            v-model="form[item.value]"></el-input>
+                    v-model="form[item.value]"></el-input>
           <el-input type="textarea" v-if="item.type == 'textarea'" :readonly="isDetail" v-model="form[item.value]"
-            :placeholder="item.tip || '请输入'"></el-input>
+                    :placeholder="item.tip || '请输入'"></el-input>
 
           <el-date-picker style="width: 100%" v-if="item.type == 'time'" :readonly="isDetail" v-model="form[item.value]"
-            type="date" :placeholder="item.tip || '请选择时间'" value-format="YYYY-MM-DD" />
+                          value-format="YYYY-MM-DD HH:mm:ss" type="datetime" :placeholder="item.tip || '请选择时间'" />
 
           <el-select v-if="item.type == 'select'" v-model="form[item.value]" :placeholder="item.tip || '请选择'"
-            style="width: 100%">
+                     style="width: 100%">
             <el-option v-for="item in item.options" :key="item.value" :label="item.label" :value="item.value" />
           </el-select>
         </el-form-item>
@@ -30,6 +30,8 @@ import { ContentWrap } from '@/components/ContentWrap'
 import { ref, onBeforeMount } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { addDispose, getOrgList } from '../apis'
+import { onMounted } from 'vue'
+import moment from "moment"
 
 const router = useRouter()
 const route = useRoute()
@@ -98,6 +100,8 @@ onBeforeMount(() => {
     for (var key in params) {
       form.value[key] = params[key]
     }
+  } else {
+    form.value.time = moment().format('YYYY-MM-DD HH:mm:ss')
   }
   getResponseData()
 })

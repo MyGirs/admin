@@ -10,8 +10,8 @@
           <el-input type="textarea" v-if="item.type == 'textarea'" :readonly="!isUpdate" v-model="form[item.value]"
                     :placeholder="item.tip || '请输入'"></el-input>
 
-          <el-date-picker style="width: 100%" value-format="yyyy-MM-dd HH:mm:ss" v-if="item.type == 'time'"
-                          :readonly="!isUpdate" v-model="form[item.value]" type="datetime"
+          <el-date-picker style="width: 100%" value-format="YYYY-MM-DD HH:mm:ss" type="datetime"
+                          v-if="item.type == 'time'" :readonly="!isUpdate" v-model="form[item.value]"
                           :placeholder="item.tip || '请选择时间'" />
           <el-select v-if="item.type == 'select'" v-model="form[item.value]" :readonly="!isUpdate"
                      :placeholder="item.tip || '请选择'" style="width: 100%">
@@ -58,6 +58,7 @@ watch(() => props.selectRow, (newVal) => {
   for (var key in newVal) {
     form[key] = newVal[key]
   }
+  isUpdate.value = false
 }, { deep: true, immediate: true })
 const handleUpdate = async () => {
   let res = await updatedRiskHazardsApi(form)

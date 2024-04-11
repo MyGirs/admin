@@ -6,7 +6,7 @@
     <el-table v-loading="loading" :data="responseData.list" height="400">
       <el-table-column prop="type" label="主题或类型" min-width="150"></el-table-column>
       <el-table-column prop="dep" label="部门" min-width="150"></el-table-column>
-      <el-table-column prop="time" label="时间" :formatter="formatter" min-width="150"></el-table-column>
+      <el-table-column prop="time" label="时间" min-width="150"></el-table-column>
       <el-table-column prop="address" label="地址" min-width="180"></el-table-column>
       <el-table-column prop="party" label="当事人" min-width="150"></el-table-column>
       <el-table-column prop="recordInfor" label="记录或详情" min-width="180"></el-table-column>
@@ -21,8 +21,8 @@
       </el-table-column>
     </el-table>
     <el-pagination v-model:current-page="responseData.pagenum" v-model:page-size="responseData.pagesize"
-      layout="sizes,prev, pager, next" :total="responseData.total" :page-sizes="[10, 20, 30, 50]"
-      @size-change="handleSizeChange" @current-change="handleCurrentChange" />
+                   layout="sizes,prev, pager, next" :total="responseData.total" :page-sizes="[10, 20, 30, 50]"
+                   @size-change="handleSizeChange" @current-change="handleCurrentChange" />
   </ContentWrap>
 </template>
 <script setup lang="ts">
@@ -31,7 +31,6 @@ import { ContentWrap } from '@/components/ContentWrap'
 import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { getDisposeList } from './apis'
-import moment from 'moment'
 
 const loading = ref(false)
 
@@ -72,10 +71,7 @@ const getResponseData = async () => {
   }
 }
 
-const formatter = (row) => {
-  let t = moment(row.time).format('YYYY-MM_DD')
-  return t
-}
+
 
 const openDetail = (row) => {
   router.push({

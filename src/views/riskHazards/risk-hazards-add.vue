@@ -35,6 +35,8 @@ import { useRouter } from 'vue-router'
 import { addRiskHazardsApi } from './api'
 import { formItemList } from "./commonField"
 import { parseMinWidth } from 'element-plus/es/components/table/src/util'
+import { onMounted } from 'vue'
+import moment from 'moment';
 
 const form = ref({
   points: '',
@@ -53,7 +55,6 @@ const form = ref({
 const Router = useRouter()
 const handleAdd = async () => {
   let params = JSON.parse(JSON.stringify(form.value))
-  console.log(params)
   let res = await addRiskHazardsApi({ ...params })
   if (res.code == 200) {
     ElMessage.success('新增成功')
@@ -65,6 +66,9 @@ const handleBack = () => {
     path: '/riskHazards/list'
   })
 }
+onMounted(() => {
+  form.value.time = moment().format('YYYY-MM-DD HH:mm:ss')
+})
 </script>
 <style lang="less" scoped>
 .el-form {

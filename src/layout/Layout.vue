@@ -23,7 +23,6 @@ const layout = computed(() => appStore.getLayout)
 const handleClickOutside = () => {
   appStore.setCollapse(true)
 }
-console.log(layout,'--layout--')
 const renderLayout = () => {
   switch (unref(layout)) {
     case 'classic':
@@ -71,9 +70,10 @@ export default defineComponent({
 
 .@{prefix-cls} {
   background-color: var(--app-content-bg-color);
+
   .@{prefix-cls}-content-scrollbar {
-    & > :deep(.el-scrollbar__wrap) {
-      & > .@{elNamespace}-scrollbar__view {
+    &> :deep(.el-scrollbar__wrap) {
+      &>.@{elNamespace}-scrollbar__view {
         display: flex;
         height: 100% !important;
         flex-direction: column;

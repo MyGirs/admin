@@ -20,21 +20,15 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination
-      v-model:current-page="responseData.pagenum"
-      v-model:page-size="responseData.pagesize"
-      layout="sizes,prev, pager, next"
-      :total="responseData.total"
-      :page-sizes="[10, 20, 30, 50]"
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-    />
+    <el-pagination v-model:current-page="responseData.pagenum" v-model:page-size="responseData.pagesize"
+                   layout="sizes,prev, pager, next" :total="responseData.total" :page-sizes="[10, 20, 30, 50]"
+                   @size-change="handleSizeChange" @current-change="handleCurrentChange" />
   </ContentWrap>
 </template>
 <script setup lang="ts">
 import { ElButton } from 'element-plus'
 import { ContentWrap } from '@/components/ContentWrap'
-import { ref, reactive,onMounted } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { getStatisticsList } from './apis'
 
@@ -98,6 +92,7 @@ const handleAdd = () => {
   display: flex;
   justify-content: flex-end;
 }
+
 .el-pagination {
   margin-top: 10px;
 }

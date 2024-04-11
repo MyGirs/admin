@@ -1,18 +1,19 @@
 <template>
   <ContentWrap :title="title">
     <el-form :model="form" label-width="100">
-      <el-col :xl="8" :lg="10" :md="12" :sm="12" :xs="24" v-for="(item, index) in formItemList" :key="index">
+      <el-col :xl="10" :lg="10" :md="12" :sm="12" :xs="24" v-for="(item, index) in formItemList" :key="index">
         <el-form-item :label="item.label">
           <el-input v-if="item.type == 'input'" :placeholder="item.tip || '请输入'" v-model="form[item.value]"
-            :readonly="isDetail"></el-input>
+                    :readonly="isDetail"></el-input>
           <el-input type="textarea" v-if="item.type == 'textarea'" v-model="form[item.value]"
-            :placeholder="item.tip || '请输入'" :readonly="isDetail"></el-input>
+                    :placeholder="item.tip || '请输入'" :readonly="isDetail"></el-input>
 
-          <el-date-picker style="width: 100%" v-if="item.type == 'time'" v-model="form[item.value]" type="date"
-            :placeholder="item.tip || '请选择时间'" value-format="YYYY-MM-DD" :readonly="isDetail" />
+          <el-date-picker style="width: 100%" v-if="item.type == 'time'" v-model="form[item.value]"
+                          value-format="YYYY-MM-DD HH:mm:ss" type="datetime" :placeholder="item.tip || '请选择时间'"
+                          :readonly="isDetail" />
 
           <el-select v-if="item.type == 'select'" v-model="form[item.value]" :placeholder="item.tip || '请选择'"
-            style="width: 100%">
+                     style="width: 100%">
             <el-option v-for="item in item.options" :key="item.value" :label="item.label" :value="item.value" />
           </el-select>
         </el-form-item>
@@ -127,6 +128,10 @@ const handleBack = () => {
 .el-form {
   display: flex;
   flex-wrap: wrap;
+}
+
+.el-col {
+  margin-right: 10px;
 }
 
 .page-button {
