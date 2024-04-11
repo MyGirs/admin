@@ -4,14 +4,14 @@
   </ContentWrap>
   <ContentWrap title="生产统计表">
     <el-table v-loading="loading" :data="responseData.list" height="400">
-      <el-table-column prop="morningPlan" label="早班计划"></el-table-column>
-      <el-table-column prop="morningSituation" label="早班完成情况"></el-table-column>
-      <el-table-column prop="centrePlan" label="中班计划"></el-table-column>
-      <el-table-column prop="centreSituation" label="中班完成情况"></el-table-column>
-      <el-table-column prop="eveningPlan" label="晚班计划"></el-table-column>
-      <el-table-column prop="eveningSituation" label="晚班完成情况"></el-table-column>
-      <el-table-column prop="totalPlan" label="合计计划"></el-table-column>
-      <el-table-column prop="totalSituation" label="合计完成情况"></el-table-column>
+      <el-table-column prop="morningPlan" label="早班计划" min-width="180"></el-table-column>
+      <el-table-column prop="morningSituation" label="早班完成情况" min-width="180"></el-table-column>
+      <el-table-column prop="centrePlan" label="中班计划" min-width="180"></el-table-column>
+      <el-table-column prop="centreSituation" label="中班完成情况" min-width="180"></el-table-column>
+      <el-table-column prop="eveningPlan" label="晚班计划" min-width="180"></el-table-column>
+      <el-table-column prop="eveningSituation" label="晚班完成情况" min-width="180"></el-table-column>
+      <el-table-column prop="totalPlan" label="合计计划" min-width="180"></el-table-column>
+      <el-table-column prop="totalSituation" label="合计完成情况" min-width="180"></el-table-column>
       <el-table-column fixed="right" label="操作" width="80">
         <template #default="{ row }">
           <el-button link type="primary" size="small" @click.prevent="openDetail(row)">

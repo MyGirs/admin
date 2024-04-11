@@ -4,12 +4,12 @@
   </ContentWrap>
   <ContentWrap title="值班记录表">
     <el-table v-loading="loading" :data="responseData.list" height="400">
-      <el-table-column prop="time" label="时间" :formatter="formatter"></el-table-column>
-      <el-table-column prop="weather" label="天气"></el-table-column>
-      <el-table-column prop="user" label="值班领导"></el-table-column>
-      <el-table-column prop="route" label="路线"></el-table-column>
-      <el-table-column prop="content" label="内容"></el-table-column>
-      <el-table-column prop="handlingMeasures" label="处理措施"></el-table-column>
+      <el-table-column prop="time" label="时间" :formatter="formatter" min-width="150"></el-table-column>
+      <el-table-column prop="weather" label="天气" min-width="150"></el-table-column>
+      <el-table-column prop="user" label="值班领导" min-width="150"></el-table-column>
+      <el-table-column prop="route" label="路线" min-width="180"></el-table-column>
+      <el-table-column prop="content" label="内容" min-width="180"></el-table-column>
+      <el-table-column prop="handlingMeasures" label="处理措施" min-width="180"></el-table-column>
       <el-table-column fixed="right" label="操作" width="80">
         <template #default="{ row }">
           <el-button link type="primary" size="small" @click.prevent="openDetail(row)">

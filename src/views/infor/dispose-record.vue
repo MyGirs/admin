@@ -4,14 +4,14 @@
   </ContentWrap>
   <ContentWrap title="处置记录表">
     <el-table v-loading="loading" :data="responseData.list" height="400">
-      <el-table-column prop="type" label="主题或类型"></el-table-column>
-      <el-table-column prop="dep" label="部门"></el-table-column>
-      <el-table-column prop="time" label="时间" :formatter="formatter"></el-table-column>
-      <el-table-column prop="address" label="地址"></el-table-column>
-      <el-table-column prop="party" label="当事人"></el-table-column>
-      <el-table-column prop="recordInfor" label="记录或详情"></el-table-column>
-      <el-table-column prop="opinion" label="处理意见"></el-table-column>
-      <el-table-column prop="mark" label="备注"></el-table-column>
+      <el-table-column prop="type" label="主题或类型" min-width="150"></el-table-column>
+      <el-table-column prop="dep" label="部门" min-width="150"></el-table-column>
+      <el-table-column prop="time" label="时间" :formatter="formatter" min-width="150"></el-table-column>
+      <el-table-column prop="address" label="地址" min-width="180"></el-table-column>
+      <el-table-column prop="party" label="当事人" min-width="150"></el-table-column>
+      <el-table-column prop="recordInfor" label="记录或详情" min-width="180"></el-table-column>
+      <el-table-column prop="opinion" label="处理意见" min-width="180"></el-table-column>
+      <el-table-column prop="mark" label="备注" min-width="180"></el-table-column>
       <el-table-column fixed="right" label="操作" width="80">
         <template #default="{ row }">
           <el-button link type="primary" size="small" @click.prevent="openDetail(row)">
