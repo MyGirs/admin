@@ -44,7 +44,6 @@ const getIconifyStyle = computed(() => {
     <svg v-if="isLocal" aria-hidden="true">
       <use :xlink:href="symbolId" />
     </svg>
-
     <template v-else>
       <Icon v-if="isUseOnline" :icon="icon" :style="getIconifyStyle" />
       <div v-else :class="`${icon} iconify`" :style="getIconifyStyle"></div>

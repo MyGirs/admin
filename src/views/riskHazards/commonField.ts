@@ -1,8 +1,8 @@
 type formItems = {
-  type: String,
-  value: String,
-  label: String,
-  tip: String,
+  type: String
+  value: String
+  label: String
+  tip: String
   options?: Array<any>
 }
 export const formItemList: Array<formItems> = [
@@ -21,7 +21,8 @@ export const formItemList: Array<formItems> = [
   {
     type: 'time',
     value: 'time',
-    label: '时间'
+    label: '时间',
+    tip: '请选择时间'
   },
   {
     type: 'select',

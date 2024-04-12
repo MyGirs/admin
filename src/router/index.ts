@@ -96,7 +96,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         component: () => import('@/views/infor/duty-record.vue'),
         name: 'DutyRecord',
         meta: {
-          title: '值班记录表',
+          title: '应急值守值班记录表',
           noCache: true,
           affix: false
         },
@@ -106,7 +106,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
             component: () => import('@/views/infor/components/add-record.vue'),
             name: 'AddRecord',
             meta: {
-              title: '值班记录表详情',
+              title: '应急值守值班记录表详情',
               noCache: true,
               affix: false,
               hidden: true
@@ -119,7 +119,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         component: () => import('@/views/infor/dispose-record.vue'),
         name: 'DisposeRecord',
         meta: {
-          title: '处置记录',
+          title: '突发险情事故处置记录',
           noCache: true,
           affix: false
         },
@@ -129,7 +129,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
             component: () => import('@/views/infor/components/add-dispose-record.vue'),
             name: 'AddDisposeRecord',
             meta: {
-              title: '处置记录详情',
+              title: '突发险情事故处置记录详情',
               noCache: true,
               affix: false,
               hidden: true
@@ -142,7 +142,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         component: () => import('@/views/infor/produce-record.vue'),
         name: 'ProduceRecord',
         meta: {
-          title: '生产记录',
+          title: '安全生产记录',
           noCache: true,
           affix: false
         },
@@ -152,7 +152,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
             component: () => import('@/views/infor/components/add-produce-record.vue'),
             name: 'AddProduceRecord',
             meta: {
-              title: '生产记录详情',
+              title: '安全生产记录详情',
               noCache: true,
               affix: false,
               hidden: true
@@ -165,7 +165,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         component: () => import('@/views/infor/produce-statistics.vue'),
         name: 'ProduceStatistics',
         meta: {
-          title: '生产统计',
+          title: '安全生产统计台账',
           noCache: true,
           affix: false
         },
@@ -175,7 +175,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
             component: () => import('@/views/infor/components/add-produce-statistics.vue'),
             name: 'AddProduceStatistics',
             meta: {
-              title: '生产统计详情',
+              title: '安全生产统计台账详情',
               noCache: true,
               affix: false,
               hidden: true
@@ -189,23 +189,44 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
     path: '/riskHazards',
     name: 'RiskHazards',
     component: Layout,
-    meta: {},
+    meta: {
+      title: '风险隐患信息化管理',
+      icon: 'ep:management'
+    },
     children: [
       {
-        path: 'list',
-        component: () => import('@/views/riskHazards/risk-hazards-list.vue'),
-        name: 'RiskHazardsList',
+        path: 'majorSafety',
+        component: () => import('@/views/riskHazards/major-safety-list.vue'),
+        name: 'MajorSafety',
         meta: {
-          title: '风险隐患信息化管理',
-          icon: 'ep:management'
+          title: '重大安全风险清单及管控措施台账'
         }
       },
       {
-        path: 'add',
-        component: () => import('@/views/riskHazards/risk-hazards-add.vue'),
-        name: 'RiskHazardsAdd',
+        path: 'majorSafetyAdd',
+        component: () => import('@/views/riskHazards/major-safety-add.vue'),
+        name: 'MajorSafetyAdd',
         meta: {
-          title: '新增风险隐患信息化管理',
+          title: '新增',
+          noCache: true,
+          hidden: true,
+          noTagsView: true
+        }
+      },
+      {
+        path: 'accidentAdminister',
+        component: () => import('@/views/riskHazards/accident-administer-list.vue'),
+        name: 'AccidentAdminister',
+        meta: {
+          title: '事故隐患排查治理台账'
+        }
+      },
+      {
+        path: 'accidentAdministerAdd',
+        component: () => import('@/views/riskHazards/accident-administer-add.vue'),
+        name: 'AccidentAdministerAdd',
+        meta: {
+          title: '新增',
           noCache: true,
           hidden: true,
           noTagsView: true
