@@ -28,15 +28,13 @@
         <el-table-column prop="accidentType" min-width="100px" label="事故类型"></el-table-column>
         <el-table-column prop="controlMeasures" min-width="100px" label="管控措施"></el-table-column>
         <el-table-column prop="controlPerson" min-width="100px" label="管控责任人"></el-table-column>
-        <el-table-column prop="responsiblePerson" min-width="100px" show-overflow-tooltip
-                         label="分管责任人"></el-table-column>
+        <el-table-column prop="responsiblePerson" min-width="100px" show-overflow-tooltip label="分管责任人"></el-table-column>
         <el-table-column prop="responsibilityUnit" min-width="100px" label="责任单位"></el-table-column>
         <el-table-column prop="depPerson" label="部门责任人" min-width="100px" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="completeTime" min-width="120px" label="完成时限"></el-table-column>
-        <el-table-column prop="maxWorkPerson" label="作业人数上限"></el-table-column>
-        <el-table-column prop="financialSecurity" min-width="100px" show-overflow-tooltip
-                         label="资金保障"></el-table-column>
-        <el-table-column min-width="100px" show-overflow-tooltip label="完成情况及验收人">
+        <el-table-column prop="completeTime" min-width="150px" label="完成时限"></el-table-column>
+        <el-table-column prop="maxWorkPerson" min-width="100px" label="作业人数上限"></el-table-column>
+        <el-table-column prop="financialSecurity" min-width="100px" show-overflow-tooltip label="资金保障"></el-table-column>
+        <el-table-column min-width="150px" show-overflow-tooltip label="完成情况及验收人">
           <template #default="{ row }">{{ row.completeSituation }}{{ row.acceptancePerson }}</template>
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="80">
@@ -48,16 +46,19 @@
         </el-table-column>
       </el-table>
       <el-pagination layout="sizes,prev, pager, next" :total="responseData.total" :page-sizes="[10, 20, 30, 50]"
-                     @size-change="handleSizeChange" @current-change="handleCurrentChange" />
+        @size-change="handleSizeChange" @current-change="handleCurrentChange" />
     </ContentWrap>
-
+    <majorDialog v-model="dialogVisible" :selectRow="selectRow" v-if="dialogVisible" @submit="getResponseData">
+    </majorDialog>
   </div>
 </template>
 <script setup lang="ts">
-import { ContentWrap } from '@/components/ContentWrap'
-import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { getRiskHazardsApi } from './api'
+import { ref, reactive, onMounted } from 'vue'
+
+import { getMeasureListApi } from './api'
+import { ContentWrap } from '@/components/ContentWrap'
+import majorDialog from './components/major-dialog.vue'
 const loading = ref(false)
 const responseData = reactive({
   list: [],
@@ -80,7 +81,7 @@ const handleCurrentChange = (val: number) => {
 const getResponseData = async () => {
   loading.value = true
   try {
-    let res = await getRiskHazardsApi(requestData)
+    let res = await getMeasureListApi(requestData)
     responseData.list = res.data
     responseData.total = res.total
     loading.value = false
@@ -99,9 +100,10 @@ const openDialog = (row) => {
 const Router = useRouter()
 const handleAdd = () => {
   Router.push({
-    path: '/riskHazards/add'
+    path: 'majorSafetyAdd'
   })
 }
+
 onMounted(getResponseData)
 </script>
 <style lang="less" scoped>
@@ -117,7 +119,7 @@ onMounted(getResponseData)
     margin-bottom: 10px;
 
     .el-input,
-    .el-selec {
+    .el-select {
       max-width: 300px
     }
   }

@@ -24,7 +24,7 @@ import { ElButton, ElForm, ElInput, ElFormItem, ElDatePicker, ElMessage } from '
 import { ContentWrap } from '@/components/ContentWrap'
 import { ref, onBeforeMount } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { addDuty } from '../apis'
+import { addDuty } from '../api'
 import moment from "moment"
 
 const router = useRouter()

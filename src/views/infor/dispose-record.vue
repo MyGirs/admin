@@ -30,7 +30,7 @@ import { ElButton } from 'element-plus'
 import { ContentWrap } from '@/components/ContentWrap'
 import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { getDisposeList } from './apis'
+import { getDisposeList } from './api'
 
 const loading = ref(false)
 

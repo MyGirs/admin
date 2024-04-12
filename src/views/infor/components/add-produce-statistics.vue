@@ -29,7 +29,7 @@ import { ElButton, ElForm, ElInput, ElFormItem, ElDatePicker, ElMessage } from '
 import { ContentWrap } from '@/components/ContentWrap'
 import { ref, onBeforeMount } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { addStatistics } from '../apis'
+import { addStatistics } from '../api'
 
 const router = useRouter()
 const route = useRoute()

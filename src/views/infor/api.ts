@@ -1,34 +1,158 @@
 import HttpClient from '@/axios'
-export const getProduceStatisticApi = (data): Promise<any> => {
-  return Promise.resolve({
-    code: 200,
-    data: [
-      {
-        morningPlan: '早计划',
-        morningSituation: '早完成情况早完成情况早完成情况早完成情况早完成情况早完成情况早完成情况',
-        centrePlan: '中班计划',
-        centreSituation: '中班完成情况',
-        eveningPlan: '晚班计划',
-        eveningSituation: '晚班完成情况',
-        totalPlan: '合计计划',
-        totalSituation: '合计完成情况'
-      }
-    ],
-    total: 100
+
+const baseURL = 'api/services/app/SafetyQualityStandardization'
+// 值班记录列表查询
+const getDutyList = (data): Promise<any> => {
+  return new Promise((resolve, reject) => {
+    return HttpClient({
+      url: baseURL + '/getDutyRecord',
+      method: 'get',
+      params: data
+    })
+      .then((res) => {
+        resolve(res)
+      })
+      .catch((err) => {
+        reject(err)
+      })
   })
-  // return HttpClient({
-  //   url: '/api/getProduceStatistic,
-  //   method: 'post',
-  //   data
-  // })
 }
-export const addProduceStatisticApi = (data): Promise<any> => {
-  return Promise.resolve({
-    code: 200,
+// 值班记录新增
+const addDuty = (data): Promise<any> => {
+  return new Promise((resolve, reject) => {
+    return HttpClient({
+      url: baseURL + '/addDutyRecord',
+      method: 'post',
+      data
+    })
+      .then((res) => {
+        resolve(res)
+      })
+      .catch((err) => {
+        reject(err)
+      })
   })
-  // return HttpClient({
-  //   url: '/api/addProduceStatistic,
-  //   method: 'post',
-  //   data
-  // })
+}
+// 处置记录列表查询
+const getDisposeList = (data): Promise<any> => {
+  return new Promise((resolve, reject) => {
+    return HttpClient({
+      url: baseURL + '/getDisposeRecord',
+      method: 'get',
+      params: data
+    })
+      .then((res) => {
+        resolve(res)
+      })
+      .catch((err) => {
+        reject(err)
+      })
+  })
+}
+// 处置记录新增
+const addDispose = (data): Promise<any> => {
+  return new Promise((resolve, reject) => {
+    return HttpClient({
+      url: baseURL + '/addDisposeRecord',
+      method: 'post',
+      data
+    })
+      .then((res) => {
+        resolve(res)
+      })
+      .catch((err) => {
+        reject(err)
+      })
+  })
+}
+// 处置记录部门列表
+const getOrgList = (): Promise<any> => {
+  return new Promise((resolve, reject) => {
+    return HttpClient({
+      url: baseURL + '/getDep',
+      method: 'get'
+    })
+      .then((res) => {
+        resolve(res)
+      })
+      .catch((err) => {
+        reject(err)
+      })
+  })
+}
+// 生产记录列表查询
+const getProductList = (data): Promise<any> => {
+  return new Promise((resolve, reject) => {
+    return HttpClient({
+      url: baseURL + '/getProduceRecord',
+      method: 'get',
+      params: data
+    })
+      .then((res) => {
+        resolve(res)
+      })
+      .catch((err) => {
+        reject(err)
+      })
+  })
+}
+// 生产记录新增
+const addProduct = (data): Promise<any> => {
+  return new Promise((resolve, reject) => {
+    return HttpClient({
+      url: baseURL + '/addProduceRecord',
+      method: 'post',
+      data
+    })
+      .then((res) => {
+        resolve(res)
+      })
+      .catch((err) => {
+        reject(err)
+      })
+  })
+}
+// 生产统计列表查询
+const getStatisticsList = (params): Promise<any> => {
+  return new Promise((resolve, reject) => {
+    return HttpClient({
+      url: baseURL + '/getProduceStatistic',
+      method: 'get',
+      params
+    })
+      .then((res) => {
+        resolve(res)
+      })
+      .catch((err) => {
+        reject(err)
+      })
+  })
+}
+// 生产统计新增
+const addStatistics = (data): Promise<any> => {
+  return new Promise((resolve, reject) => {
+    return HttpClient({
+      url: baseURL + '/addProduceStatistic',
+      method: 'post',
+      data
+    })
+      .then((res) => {
+        resolve(res)
+      })
+      .catch((err) => {
+        reject(err)
+      })
+  })
+}
+
+export {
+  getDutyList,
+  addDuty,
+  getDisposeList,
+  addDispose,
+  getOrgList,
+  getProductList,
+  addProduct,
+  getStatisticsList,
+  addStatistics
 }

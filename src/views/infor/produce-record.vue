@@ -33,7 +33,7 @@ import { ElButton } from 'element-plus'
 import { ContentWrap } from '@/components/ContentWrap'
 import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { getProductList } from './apis'
+import { getProductList } from './api'
 
 const loading = ref(false)
 

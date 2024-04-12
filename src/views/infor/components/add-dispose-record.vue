@@ -29,7 +29,7 @@ import { ElButton, ElForm, ElInput, ElFormItem, ElDatePicker, ElMessage } from '
 import { ContentWrap } from '@/components/ContentWrap'
 import { ref, onBeforeMount } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { addDispose, getOrgList } from '../apis'
+import { addDispose, getOrgList } from '../api'
 import { onMounted } from 'vue'
 import moment from "moment"
 
